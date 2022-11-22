@@ -25,7 +25,7 @@ public class SeaBattleGame {
 
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", 750, 750);
-        canvas.setBackground(Color.BLACK);
+        canvas.setBackground(Color.WHITE);
         screens = new HomeScreen(canvas, this);
         screens.homeScreen();
 
@@ -47,17 +47,17 @@ public class SeaBattleGame {
 
     private void generateMaze() {
         maze = new String[28][24];
-        maze[0] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[0] = new String[] { "B", "B", "B", "B", "B", "B", "C", "C", "C", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
         maze[1] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[2] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[2] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[3] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[3] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[4] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[4] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[5] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[5] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
         maze[6] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
@@ -69,39 +69,39 @@ public class SeaBattleGame {
             "B", "B", "B", "B", "B", "B", "B" };
         maze[10] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[11] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[11] = new String[] { "B", "B", "B", "B", "B", "C", "C", "C", "C", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[12] = new String[] { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "" };
-        maze[13] = new String[] { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "" };
-        maze[14] = new String[] { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "" };
-        maze[15] = new String[] { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "" };
-        maze[16] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[12] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
+            "R", "R", "R", "R", "R", "R", "R" };
+        maze[13] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
+            "R", "R", "R", "R", "R", "R", "R" };
+        maze[14] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
+            "R", "R", "R", "R", "R", "R", "R" };
+        maze[15] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
+            "R", "R", "R", "R", "R", "R", "R" };
+        maze[16] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "C", "C", "C", "C", "C", "C", "C", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
         maze[17] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
         maze[18] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[19] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[19] = new String[] { "B", "B", "B", "B", "C", "C", "C", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[20] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[20] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[21] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[21] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[22] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[22] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[23] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[23] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[24] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[24] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
         maze[25] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
         maze[26] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
-        maze[27] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
+        maze[27] = new String[] { "B", "C", "C", "C", "C", "B", "B", "B", "C", "C", "C", "C", "B", "B", "B", "B", "B",
             "B", "B", "B", "B", "B", "B", "B" };
     }
 

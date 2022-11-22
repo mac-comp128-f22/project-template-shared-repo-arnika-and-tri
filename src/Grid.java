@@ -46,8 +46,11 @@ public class Grid extends GraphicsGroup {
                     cell.addGraphics(new Wall(size, size));
                     cell.setTraversable(false);
                 } else if (type.equals("C")) {
-                  
-                }
+                  cell.addGraphics(new Ship(3));
+               
+                } else if (type.equals("R")) {
+                    cell.addGraphics(new River(size,size));
+                  } 
                 this.add(cell.getGraphics());
                 cells[i][j] = cell;
             }

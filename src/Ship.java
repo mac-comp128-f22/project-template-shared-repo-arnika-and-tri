@@ -12,10 +12,10 @@ public class Ship extends GraphicsGroup {
     private int direction;
     private Random random;
 
-    public Ship(String shipNum, int size) {
+    public Ship(int size) {
         super();
     
-        this.shipNum = shipNum;
+        // this.shipNum = shipNum;
         this.size = size;
 
         random = new Random();
@@ -28,9 +28,9 @@ public class Ship extends GraphicsGroup {
     }
 
     public void setImage(int size) {
-        shipIcon = new Image("shipSize"+ size + ".png");
-        // shipIcon.setMaxWidth(squareSize * size);
-        // shipIcon.setMaxHeight(squareSize * size);
+        shipIcon = new Image("sprite-icons/" + "shipSize" + ".png");
+        shipIcon.setMaxWidth(30);
+        shipIcon.setMaxHeight(30);
     }
 
     public int chooseRandomDirection() {
