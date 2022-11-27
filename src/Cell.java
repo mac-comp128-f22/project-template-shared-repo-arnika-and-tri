@@ -8,7 +8,6 @@ import edu.macalester.graphics.Rectangle;
 public class Cell {
     private GraphicsGroup graphics;
     private Rectangle rectangle;
-    private boolean isTraversable;
 
     /**
      * Constructs an instance of a cell that is a square of a speicifed width/height.
@@ -17,23 +16,6 @@ public class Cell {
         graphics = new GraphicsGroup();
         rectangle = new Rectangle(0, 0, size, size);
         graphics.add(rectangle);
-        isTraversable = true;
-    }
-
-    /**
-     * Checks if an object (whether it be player or ghost) can enter the cell.
-     * 
-     * @return true if it can, false if it cannot.
-     */
-    public boolean getTraversable() {
-        return isTraversable;
-    }
-
-    /**
-     * Changes whether or not an object can enter the cell based on the inputted value.
-     */
-    public void setTraversable(boolean isTraversable) {
-        this.isTraversable = isTraversable;
     }
 
     /**

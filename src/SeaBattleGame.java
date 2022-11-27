@@ -1,31 +1,21 @@
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsText;
-import edu.macalester.graphics.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
-import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.FontStyle;
-import edu.macalester.graphics.GraphicsText;
-
+import java.util.Random;
 
 public class SeaBattleGame {
-    private static final int CANVAS_WIDTH = 720;
-    private static final int CANVAS_HEIGHT = 750;
+    private static final int CANVAS_WIDTH = 400;
+    private static final int CANVAS_HEIGHT = 840;
+    private static final int cellSize = 40;
     private Grid grid;
     private CanvasWindow canvas;
     private HomeScreen screens;
     private String[][] maze;
-    private int tracker;
-    private GraphicsText gameStatus;
-    private int numOfCoins;
-    private boolean playingGame;
-    // private static final = 720;
 
 
     public SeaBattleGame() {
-        canvas = new CanvasWindow("Sea Battle", 750, 750);
+        canvas = new CanvasWindow("Sea Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.WHITE);
         screens = new HomeScreen(canvas, this);
         screens.homeScreen();
@@ -33,9 +23,8 @@ public class SeaBattleGame {
     }
 
     public void playingScreen() {
-        numOfCoins = 310;
         settingUpGame();
-        grid = new Grid(28, 24, 30, maze, this);
+        grid = new Grid(10, 21, cellSize, maze, this);
         canvas.add(grid);
         canvas.onMouseDown(event-> {
             if(event.getClass().toString().equals("Rectangle")){
@@ -45,72 +34,102 @@ public class SeaBattleGame {
     }
 
     private void settingUpGame() {
-        generateMaze();
-        playingGame = true;
+        generateGrid();
         canvas.draw();
     }
 
+    private void generateGrid() {
+        int size = 10;
+        Random random = new Random();
+        int[][] playerBoard = new int[size][size];
+        int[][] opponentBoard = new int[size][size];
+        ArrayList<int[][]> playerBoards = new ArrayList<int[][]>(2);
+        playerBoards.add(playerBoard);
+        playerBoards.add(opponentBoard);
 
-    private void generateMaze() {
-        maze = new String[28][24];
-        maze[0] = new String[] { "B", "B", "B", "B", "B", "B", "C", "C", "C", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[1] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[2] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[3] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[4] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[5] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[6] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[7] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[8] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[9] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[10] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[11] = new String[] { "B", "B", "B", "B", "B", "C", "C", "C", "C", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[12] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
-            "R", "R", "R", "R", "R", "R", "R" };
-        maze[13] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
-            "R", "R", "R", "R", "R", "R", "R" };
-        maze[14] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
-            "R", "R", "R", "R", "R", "R", "R" };
-        maze[15] = new String[] { "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R", "R",
-            "R", "R", "R", "R", "R", "R", "R" };
-        maze[16] = new String[] { "B", "B", "B", "B", "B", "B", "B", "C", "C", "C", "C", "C", "C", "C", "C", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[17] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[18] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[19] = new String[] { "B", "B", "B", "B", "C", "C", "C", "C", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[20] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[21] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[22] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[23] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[24] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "C", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[25] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[26] = new String[] { "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
-        maze[27] = new String[] { "B", "C", "C", "C", "C", "B", "B", "B", "C", "C", "C", "C", "B", "B", "B", "B", "B",
-            "B", "B", "B", "B", "B", "B", "B" };
+        for (int[][] board : playerBoards) {
+            for (int i = 5; i > 0; i--) {
+                // start point of the ship and direction
+                int x = random.nextInt(board.length);
+                int y = random.nextInt(board.length);
+                boolean vertical = random.nextBoolean();
+
+                // correct start point so that the ship could fit in the field
+                if (vertical) {
+                    if (y + i > size) {
+                        y -= i;
+                    }
+                } else if (x + i > size) {
+                    x -= i;
+                }
+                boolean isFree = true;
+                // check for free space
+                if (vertical) {
+                    for (int m = y; m < y + i; m++) {
+                        if (board[m][x] != 0) {
+                            isFree = false;
+                            break;
+                        }
+                    }
+                } else {
+                    for (int n = x; n < x + i; n++) {
+                        if (board[y][n] != 0) {
+                            isFree = false;
+                            break;
+                        }
+                    }
+                }
+                if (!isFree) {  // no free space found, retry
+                    i++;
+                    continue;
+                }
+
+                // fill in the adjacent cells
+                if (vertical) {
+                    for (int m = Math.max(0, x - 1); m < Math.min(size, x + 2); m++) {
+                        for (int n = Math.max(0, y - 1); n < Math.min(size, y + i + 1); n++) {
+                            board[n][m] = 9;
+                        }
+                    }
+                } else {
+                    for (int m = Math.max(0, y - 1); m < Math.min(size, y + 2); m++) {
+                        for (int n = Math.max(0, x - 1); n < Math.min(size, x + i + 1); n++) {
+                            board[m][n] = 9;
+                        }
+                    }
+                }
+                // fill in the ship cells
+                for (int j = 0; j < i; j++) {
+                    board[y][x] = i;
+                    if (vertical) {
+                        y++;
+                    } else {
+                        x++;
+                    }
+                }
+            }
+        }
+        maze = new String[10][21];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 21; j++) {
+                if (j < 10) {
+                    if (playerBoard[i][j] == 0 || playerBoard[i][j] == 9) {
+                        maze[i][j] = "R";
+                    } else {
+                        maze[i][j] = "S";
+                    }
+                } else if (j == 10) {
+                    maze[i][j] = "W";
+                } else {
+                    if (opponentBoard[i][j - 11] == 0 || opponentBoard[i][j - 11] == 9) {
+                        maze[i][j] = "R";
+                    } else {
+                        maze[i][j] = "S";
+                    }
+                }
+            }
+        }
     }
-
 
     public static void main(String[] args) {
         new SeaBattleGame();
