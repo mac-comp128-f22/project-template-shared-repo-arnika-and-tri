@@ -15,6 +15,6 @@ public class River extends GraphicsGroup {
         Rectangle wall = new Rectangle(0, 0, wallWidth, wallHeight);
         this.add(wall);
         wall.setFillColor(Color.BLUE);
-        wall.setStrokeColor(Color.BLUE);
+        wall.setStrokeColor(Color.BLACK);
     }
 }

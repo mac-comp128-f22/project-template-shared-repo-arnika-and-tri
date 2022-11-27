@@ -14,7 +14,6 @@ public class Wall extends GraphicsGroup {
     public Wall(double wallWidth, double wallHeight) {
         Rectangle wall = new Rectangle(0, 0, wallWidth, wallHeight);
         this.add(wall);
-        wall.setFillColor(Color.cyan);
-        wall.setStrokeColor(Color.ORANGE);
+        wall.setFillColor(Color.BLACK);
     }
 }

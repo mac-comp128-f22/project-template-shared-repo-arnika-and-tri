@@ -2,6 +2,8 @@ import java.util.Random;
 
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.Rectangle;
+import java.awt.Color;
 
 public class Ship extends GraphicsGroup {
     private Image shipIcon;
@@ -25,12 +27,17 @@ public class Ship extends GraphicsGroup {
 
         setImage(size);
         add(shipIcon);
+
+        Rectangle wall = new Rectangle(0, 0, 40, 40);
+        this.add(wall);
+        wall.setFillColor(Color.GRAY);
+        wall.setStrokeColor(Color.GRAY);
     }
 
     public void setImage(int size) {
         shipIcon = new Image("sprite-icons/" + "shipSize" + ".png");
-        shipIcon.setMaxWidth(30);
-        shipIcon.setMaxHeight(30);
+        shipIcon.setMaxWidth(40);
+        shipIcon.setMaxHeight(40);
     }
 
     public int chooseRandomDirection() {
