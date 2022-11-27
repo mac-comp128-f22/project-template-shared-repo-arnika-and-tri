@@ -1,5 +1,6 @@
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -36,6 +37,11 @@ public class SeaBattleGame {
         settingUpGame();
         grid = new Grid(28, 24, 30, maze, this);
         canvas.add(grid);
+        canvas.onMouseDown(event-> {
+            if(event.getClass().toString().equals("Rectangle")){
+                event.get
+            }
+        });
     }
 
     private void settingUpGame() {
