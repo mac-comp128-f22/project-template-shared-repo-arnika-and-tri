@@ -28,7 +28,7 @@ public class SeaBattleGame {
         canvas.add(grid);
         canvas.onMouseDown(event-> {
             if(event.getClass().toString().equals("Rectangle")){
-                event.get
+             
             }
         });
     }
