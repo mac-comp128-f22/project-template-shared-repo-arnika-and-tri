@@ -8,7 +8,8 @@ public class Grid extends GraphicsGroup {
     protected int numRows, numCols;
     protected double size;
     private SeaBattleGame game;
-    protected Cell[][] cells;
+    public static Cell[][] cells;
+    private GraphicsGroup group;
 
     /**
      * Initializes a grid with a speicified number of rows and columns and overall size.
@@ -45,5 +46,8 @@ public class Grid extends GraphicsGroup {
                 cells[i][j] = cell;
             }
         }
+    }
+
+    public void removeRiver(){
     }
 }

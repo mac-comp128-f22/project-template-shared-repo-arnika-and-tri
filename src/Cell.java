@@ -8,6 +8,8 @@ import edu.macalester.graphics.Rectangle;
 public class Cell {
     private GraphicsGroup graphics;
     private Rectangle rectangle;
+    private River river;
+    private Ship ship;
 
     /**
      * Constructs an instance of a cell that is a square of a speicifed width/height.
@@ -32,5 +34,14 @@ public class Cell {
         group.setCenter(rectangle.getCenter());
         graphics.add(group);
     }
+
+    public void removeRiver() {
+        graphics.remove(river);
+    }
+
+    public void removeShip() {
+        graphics.remove(ship);
+    }
+
 
 }

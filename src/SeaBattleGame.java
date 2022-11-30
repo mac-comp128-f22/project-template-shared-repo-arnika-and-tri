@@ -1,4 +1,6 @@
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class SeaBattleGame {
     private CanvasWindow canvas;
     private HomeScreen screens;
     private String[][] maze;
+    private GraphicsGroup group;
 
 
     public SeaBattleGame() {
@@ -27,8 +30,11 @@ public class SeaBattleGame {
         grid = new Grid(10, 21, cellSize, maze, this);
         canvas.add(grid);
         canvas.onMouseDown(event-> {
-            if(event.getClass().toString().equals("Rectangle")){
-             
+            System.out.print("Hello");
+            System.out.println(canvas.getElementAt(event.getPosition()).getClass());
+            if(canvas.getElementAt(event.getPosition()).getClass()== Rectangle.class ){
+                System.out.println(canvas.getElementAt(event.getPosition()).getClass());    
+                canvas.remove(canvas.getElementAt(event.getPosition()));
             }
         });
     }

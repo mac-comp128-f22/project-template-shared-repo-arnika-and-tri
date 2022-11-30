@@ -11,11 +11,8 @@ public class HomeScreen {
     }
 
     public void homeScreen() {
-        // titleImage();
         playButton();
         quitButton();
-        // instructionsButton();
-        // creditsButton();
     }
 
     private void playButton() {
