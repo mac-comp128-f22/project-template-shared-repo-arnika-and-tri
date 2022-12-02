@@ -5,6 +5,7 @@ import edu.macalester.graphics.Rectangle;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class SeaBattleGame {
     private static final int CANVAS_WIDTH = 400;
@@ -26,17 +27,28 @@ public class SeaBattleGame {
     }
 
     public void playingScreen() {
-        settingUpGame();
-        grid = new Grid(10, 21, cellSize, maze, this);
-        canvas.add(grid);
-        canvas.onMouseDown(event-> {
-            System.out.print("Hello");
-            System.out.println(canvas.getElementAt(event.getPosition()).getClass());
-            if(canvas.getElementAt(event.getPosition()).getClass()== Rectangle.class ){
-                System.out.println(canvas.getElementAt(event.getPosition()).getClass());    
-                canvas.remove(canvas.getElementAt(event.getPosition()));
+        boolean play = true;
+        while(play){
+            System.out.print("abc");
+            Scanner row = new Scanner(System.in);  // Create a Scanner object
+            settingUpGame();
+            grid = new Grid(10, 21, cellSize, maze, this);
+            canvas.add(grid);
+            System.out.println("a");
+            System.out.println("Enter row number: ");
+            int rowNum = row.nextInt();
+            Scanner col = new Scanner(System.in);  // Create a Scanner object
+            System.out.println("Enter colum number: ");
+            settingUpGame();
+            grid = new Grid(10, 21, cellSize, maze, this);
+            canvas.add(grid);
+            System.out.println("a");
+            int colNum = col.nextInt();
+            System.out.println(row + " " + col);
+            if(rowNum == 1){
+                play = false;
             }
-        });
+        }
     }
 
     private void settingUpGame() {
