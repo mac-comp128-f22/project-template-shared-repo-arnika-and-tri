@@ -1,13 +1,9 @@
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-
-import javax.swing.plaf.synth.SynthDesktopIconUI;
 
 public class SeaBattleGame {
     private static final int CANVAS_WIDTH = 400;
@@ -17,8 +13,6 @@ public class SeaBattleGame {
     private CanvasWindow canvas;
     private HomeScreen screens;
     private String[][] maze;
-    private GraphicsGroup group;
-
 
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -29,19 +23,19 @@ public class SeaBattleGame {
     }
 
     public void playingScreen() {
-        boolean play = true;
+        // boolean play = true;
         settingUpGame();
         System.out.println("abc");
-        Scanner row = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter row number: ");
-        int rowNum = row.nextInt();
-        Scanner col = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter colum number: ");
-        int colNum = col.nextInt();
-        System.out.println(row + " " + col);
-        if(rowNum == 1){
-            play = false;
-        }
+        // Scanner row = new Scanner(System.in);  // Create a Scanner object
+        // System.out.println("Enter row number: ");
+        // int rowNum = row.nextInt();
+        // Scanner col = new Scanner(System.in);  // Create a Scanner object
+        // System.out.println("Enter colum number: ");
+        // int colNum = col.nextInt();
+        // System.out.println(row + " " + col);
+        // if(rowNum == 1){
+        //     play = false;
+        // }
 
         // while(play){
         //     // Scanner row = new Scanner(System.in);  // Create a Scanner object
