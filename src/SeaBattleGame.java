@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthDesktopIconUI;
+
 public class SeaBattleGame {
     private static final int CANVAS_WIDTH = 400;
     private static final int CANVAS_HEIGHT = 840;
@@ -28,32 +30,39 @@ public class SeaBattleGame {
 
     public void playingScreen() {
         boolean play = true;
-        while(play){
-            System.out.print("abc");
-            Scanner row = new Scanner(System.in);  // Create a Scanner object
-            settingUpGame();
-            grid = new Grid(10, 21, cellSize, maze, this);
-            canvas.add(grid);
-            System.out.println("a");
-            System.out.println("Enter row number: ");
-            int rowNum = row.nextInt();
-            Scanner col = new Scanner(System.in);  // Create a Scanner object
-            System.out.println("Enter colum number: ");
-            settingUpGame();
-            grid = new Grid(10, 21, cellSize, maze, this);
-            canvas.add(grid);
-            System.out.println("a");
-            int colNum = col.nextInt();
-            System.out.println(row + " " + col);
-            if(rowNum == 1){
-                play = false;
-            }
+        settingUpGame();
+        System.out.println("abc");
+        Scanner row = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter row number: ");
+        int rowNum = row.nextInt();
+        Scanner col = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter colum number: ");
+        int colNum = col.nextInt();
+        System.out.println(row + " " + col);
+        if(rowNum == 1){
+            play = false;
         }
+
+        // while(play){
+        //     // Scanner row = new Scanner(System.in);  // Create a Scanner object
+        //     // System.out.println("Enter row number: ");
+        //     // int rowNum = row.nextInt();
+        //     // Scanner col = new Scanner(System.in);  // Create a Scanner object
+        //     // System.out.println("Enter colum number: ");
+        //     // int colNum = col.nextInt();
+        //     // System.out.println(row + " " + col);
+        //     // if(rowNum == 1){
+        //     //     play = false;
+        //     // }
+        // }
     }
 
     private void settingUpGame() {
         generateGrid();
         canvas.draw();
+        grid = new Grid(10, 21, cellSize, maze, this);
+        canvas.add(grid);
+   
     }
 
     private void generateGrid() {
