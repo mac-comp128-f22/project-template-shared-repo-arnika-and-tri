@@ -28,16 +28,16 @@ public class Ship extends GraphicsGroup {
         setImage(size);
         add(shipIcon);
 
-        Rectangle wall = new Rectangle(0, 0, 40, 40);
+        Rectangle wall = new Rectangle(0, 0, 36, 36);
         this.add(wall);
         wall.setFillColor(Color.GRAY);
-        wall.setStrokeColor(Color.GRAY);
+        wall.setStrokeColor(Color.BLACK);
     }
 
     public void setImage(int size) {
         shipIcon = new Image("sprite-icons/" + "shipSize" + ".png");
-        shipIcon.setMaxWidth(40);
-        shipIcon.setMaxHeight(40);
+        shipIcon.setMaxWidth(36);
+        shipIcon.setMaxHeight(36);
     }
 
     public int chooseRandomDirection() {

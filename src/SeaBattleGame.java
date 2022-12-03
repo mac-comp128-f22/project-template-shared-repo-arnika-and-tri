@@ -1,54 +1,70 @@
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.Image;
+import edu.macalester.graphics.ui.TextField;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class SeaBattleGame {
-    private static final int CANVAS_WIDTH = 400;
-    private static final int CANVAS_HEIGHT = 840;
-    private static final int cellSize = 40;
+    private static final int CANVAS_WIDTH = 396;
+    private static final int CANVAS_HEIGHT = 828;
+    private static final int cellSize = 36;
     private Grid grid;
     private CanvasWindow canvas;
     private HomeScreen screens;
     private String[][] maze;
+    private TextField coordinateField;
 
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
-        canvas.setBackground(Color.WHITE);
+        canvas.setBackground(Color.GRAY);
         screens = new HomeScreen(canvas, this);
         screens.homeScreen();
-
     }
 
     public void playingScreen() {
-        // boolean play = true;
         settingUpGame();
-        System.out.println("abc");
-        // Scanner row = new Scanner(System.in);  // Create a Scanner object
-        // System.out.println("Enter row number: ");
-        // int rowNum = row.nextInt();
-        // Scanner col = new Scanner(System.in);  // Create a Scanner object
-        // System.out.println("Enter colum number: ");
-        // int colNum = col.nextInt();
-        // System.out.println(row + " " + col);
-        // if(rowNum == 1){
-        //     play = false;
-        // }
+        getCoordinates();
+        addCoordinateLabels();
+    }
 
-        // while(play){
-        //     // Scanner row = new Scanner(System.in);  // Create a Scanner object
-        //     // System.out.println("Enter row number: ");
-        //     // int rowNum = row.nextInt();
-        //     // Scanner col = new Scanner(System.in);  // Create a Scanner object
-        //     // System.out.println("Enter colum number: ");
-        //     // int colNum = col.nextInt();
-        //     // System.out.println(row + " " + col);
-        //     // if(rowNum == 1){
-        //     //     play = false;
-        //     // }
-        // }
+    private void getCoordinates() {
+        coordinateField = new TextField();
+        coordinateField.setCenter(CANVAS_WIDTH / 4 , CANVAS_HEIGHT - coordinateField.getHeight() / 2 - 3);
+        canvas.add(coordinateField);
+        
+        CustomButton coordinatesButton = new CustomButton("Enter Coordinates");
+        coordinatesButton.setCenter(CANVAS_WIDTH / 2 + coordinatesButton.getWidth() / 2, CANVAS_HEIGHT - coordinateField.getHeight() / 2 - 3);
+        canvas.add(coordinatesButton);
+
+        Image coordinateImage = new Image("sprite-icons/coordinate-button.png");
+        coordinateImage.setCenter(CANVAS_WIDTH / 2 + coordinatesButton.getWidth() / 2, CANVAS_HEIGHT - coordinateField.getHeight() / 2 - 3);
+        coordinateImage.setScale(0.22);
+        canvas.add(coordinateImage);
+        
+        coordinatesButton.onClick(() -> shootMissile());
+    }
+
+    private void shootMissile() {
+        String coordinates = coordinateField.getText();
+        System.out.println(coordinates);
+        if (!coordinates.isEmpty()) {
+            System.out.println("its working");
+            // change the color of the square to red
+        }
+    }
+
+    private void addCoordinateLabels() {
+        Image rowNums = new Image("sprite-icons/row-nums.png");
+        rowNums.setCenter(CANVAS_WIDTH - 17, CANVAS_HEIGHT / 2 - 20);
+        rowNums.setScale(0.4);
+        canvas.add(rowNums);
+
+        Image columnLetter = new Image("sprite-icons/column-letters.png");
+        columnLetter.setCenter(CANVAS_WIDTH / 2 - 20, CANVAS_HEIGHT - columnLetter.getHeight() / 2 - 28);
+        columnLetter.setScale(0.4);
+        canvas.add(columnLetter);
     }
 
     private void settingUpGame() {
@@ -56,7 +72,6 @@ public class SeaBattleGame {
         canvas.draw();
         grid = new Grid(10, 21, cellSize, maze, this);
         canvas.add(grid);
-   
     }
 
     private void generateGrid() {
