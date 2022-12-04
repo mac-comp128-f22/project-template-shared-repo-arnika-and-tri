@@ -64,9 +64,15 @@ public class SeaBattleGame {
         int col = Integer.parseInt(coordinateField2.getText());
         System.out.println("Num row: " + row);
         System.out.println("Num col: " + col);
+
         maze[row][col] = "Shooted";
+        int compRow = 11 + (int)(Math.random() * 10);
+        int compCol = (int)( Math.random() * 10);
+        System.out.println(compRow + ", " + compCol);
+        maze[compCol][compRow] = "Shooted";
         System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
         Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
+
         canvas.add(grid);
         
         // Cell cell = new Cell(cellSize);
