@@ -74,9 +74,15 @@ public class SeaBattleGame {
         Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
 
         canvas.add(grid);
-        System.out.println( checkWin());
-        if(checkWin() == 1|| checkWin() == -1){
-            canvas.closeWindow();;
+        System.out.println(checkWin());
+        if (checkWin() == 1 || checkWin() == -1) {
+            if(checkWin() == 1){
+                System.out.println("Player Win!");
+            } else{
+                System.out.println("Computer Win!");
+            }
+            canvas.closeWindow();
+            ;
         }
 
         // Cell cell = new Cell(cellSize);
@@ -107,7 +113,7 @@ public class SeaBattleGame {
         int res = 0;
         if (!playerHasShip) {
             res = 1;
-        } else if(!compHasShip){
+        } else if (!compHasShip) {
             res = -1;
         }
         return res;
