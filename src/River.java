@@ -18,7 +18,7 @@ public class River extends GraphicsGroup {
         river.setStrokeColor(Color.BLACK);
     }
 
-    public void setColor(){
+    public void changeColor(){
         river.setFillColor(Color.RED);
     }
 }

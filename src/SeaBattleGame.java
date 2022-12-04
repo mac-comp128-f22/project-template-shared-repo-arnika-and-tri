@@ -14,7 +14,8 @@ public class SeaBattleGame {
     private CanvasWindow canvas;
     private HomeScreen screens;
     private String[][] maze;
-    private TextField coordinateField;
+    private TextField coordinateField1;
+    private TextField coordinateField2;
 
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -30,26 +31,41 @@ public class SeaBattleGame {
     }
 
     private void getCoordinates() {
-        coordinateField = new TextField();
-        coordinateField.setCenter(CANVAS_WIDTH / 4 , CANVAS_HEIGHT - coordinateField.getHeight() / 2 - 3);
-        canvas.add(coordinateField);
-        
-        CustomButton coordinatesButton = new CustomButton("Enter Coordinates");
-        coordinatesButton.setCenter(CANVAS_WIDTH / 2 + coordinatesButton.getWidth() / 2, CANVAS_HEIGHT - coordinateField.getHeight() / 2 - 3);
+        coordinateField1 = new TextField();
+        coordinateField1.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT/2 - 2* coordinateField1.getHeight());
+        canvas.add(coordinateField1);
+
+        coordinateField2 = new TextField();
+        coordinateField2.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT/2 - 20);
+        canvas.add(coordinateField2);
+
+        CustomButton coordinatesButton = new CustomButton("Enter coordinate: ");
+        coordinatesButton.setCenter(CANVAS_WIDTH + 20 + coordinatesButton.getWidth() / 2,
+        CANVAS_HEIGHT/2 + 7);
         canvas.add(coordinatesButton);
 
         Image coordinateImage = new Image("sprite-icons/coordinate-button.png");
-        coordinateImage.setCenter(CANVAS_WIDTH / 2 + coordinatesButton.getWidth() / 2, CANVAS_HEIGHT - coordinateField.getHeight() / 2 - 3);
+        coordinateImage.setCenter(CANVAS_WIDTH  + 20 + coordinatesButton.getWidth() / 2,
+        CANVAS_HEIGHT/2 + 7);
         coordinateImage.setScale(0.22);
         canvas.add(coordinateImage);
-        
+
+
         coordinatesButton.onClick(() -> shootMissile());
+    
     }
 
     private void shootMissile() {
-        String coordinates = coordinateField.getText();
-        System.out.println(coordinates);
-        if (!coordinates.isEmpty()) {
+        int row = Integer.parseInt(coordinateField1.getText());
+        int col = Integer.parseInt(coordinateField2.getText());
+        System.out.println("Num row: " + row);
+        System.out.println("Num col: " + col);
+        Cell cell = new Cell(cellSize);
+        cell.getGraphics().setPosition(row * cellSize, col * cellSize);
+        cell.addGraphics(new Shooted(cellSize, cellSize));
+    
+    
+        if (row == 0 && col == 0 ) {
             System.out.println("its working");
             // change the color of the square to red
         }
