@@ -19,7 +19,7 @@ public class SeaBattleGame {
     private String[][] maze;
     private TextField coordinateField1;
     private TextField coordinateField2;
-    
+
 
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -36,27 +36,27 @@ public class SeaBattleGame {
 
     private void getCoordinates() {
         coordinateField1 = new TextField();
-        coordinateField1.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT/2 - 2* coordinateField1.getHeight());
+        coordinateField1.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT / 2 - 2 * coordinateField1.getHeight());
         canvas.add(coordinateField1);
 
         coordinateField2 = new TextField();
-        coordinateField2.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT/2 - 20);
+        coordinateField2.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT / 2 - 20);
         canvas.add(coordinateField2);
 
         CustomButton coordinatesButton = new CustomButton("Enter coordinate: ");
         coordinatesButton.setCenter(CANVAS_WIDTH + 20 + coordinatesButton.getWidth() / 2,
-        CANVAS_HEIGHT/2 + 7);
+            CANVAS_HEIGHT / 2 + 7);
         canvas.add(coordinatesButton);
 
         Image coordinateImage = new Image("sprite-icons/coordinate-button.png");
-        coordinateImage.setCenter(CANVAS_WIDTH  + 20 + coordinatesButton.getWidth() / 2,
-        CANVAS_HEIGHT/2 + 7);
+        coordinateImage.setCenter(CANVAS_WIDTH + 20 + coordinatesButton.getWidth() / 2,
+            CANVAS_HEIGHT / 2 + 7);
         coordinateImage.setScale(0.22);
         canvas.add(coordinateImage);
 
 
         coordinatesButton.onClick(() -> shootMissile());
-    
+
     }
 
     private void shootMissile() {
@@ -66,24 +66,51 @@ public class SeaBattleGame {
         System.out.println("Num col: " + col);
 
         maze[row][col] = "Shooted";
-        int compRow = 11 + (int)(Math.random() * 10);
-        int compCol = (int)( Math.random() * 10);
+        int compRow = 11 + (int) (Math.random() * 10);
+        int compCol = (int) (Math.random() * 10);
         System.out.println(compRow + ", " + compCol);
         maze[compCol][compRow] = "Shooted";
         System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
         Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
 
         canvas.add(grid);
-        
+        System.out.println(checkWin());
+        // if(checkWin() == 1|| checkWin() == 0){
+        //     canvas.closeWindow();;
+        // }
+
         // Cell cell = new Cell(cellSize);
         // cell.getGraphics().setPosition(row * cellSize, col * cellSize);
         // cell.addGraphics(new Shooted(cellSize, cellSize));
-    
-    
-        if (row == 0 && col == 0 ) {
-            System.out.println("its working");
-            // change the color of the square to red
+
+
+    }
+
+    private int checkWin() {
+        boolean playerWin = true;
+        boolean compWin = true;
+        for (int i = 0; i < numCols; i++) {
+            for (int j = 0; j < 1; j++) {
+                if (maze[i][j] == "S") {
+                    playerWin = false;
+                }
+            }
         }
+
+        for (int i = 0; i < numCols; i++) {
+            for (int j = 11; j < 21; j++) {
+                if (maze[i][j] == "S") {
+                    compWin = false;
+                }
+            }
+        }
+        int res = 0;
+        if (playerWin) {
+            res = 1;
+        } else if(compWin){
+            res = 0;
+        }
+        return res;
     }
 
     private void addCoordinateLabels() {
@@ -197,7 +224,7 @@ public class SeaBattleGame {
             }
         }
 
-        
+
     }
 
     public static void main(String[] args) {
