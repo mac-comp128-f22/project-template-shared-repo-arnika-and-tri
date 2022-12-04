@@ -74,10 +74,10 @@ public class SeaBattleGame {
         Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
 
         canvas.add(grid);
-        System.out.println(checkWin());
-        // if(checkWin() == 1|| checkWin() == 0){
-        //     canvas.closeWindow();;
-        // }
+        System.out.println( checkWin());
+        if(checkWin() == 1|| checkWin() == -1){
+            canvas.closeWindow();;
+        }
 
         // Cell cell = new Cell(cellSize);
         // cell.getGraphics().setPosition(row * cellSize, col * cellSize);
@@ -87,12 +87,12 @@ public class SeaBattleGame {
     }
 
     private int checkWin() {
-        boolean playerWin = true;
-        boolean compWin = true;
+        boolean playerHasShip = false;
+        boolean compHasShip = false;
         for (int i = 0; i < numCols; i++) {
-            for (int j = 0; j < 1; j++) {
+            for (int j = 0; j < 10; j++) {
                 if (maze[i][j] == "S") {
-                    playerWin = false;
+                    playerHasShip = true;
                 }
             }
         }
@@ -100,15 +100,15 @@ public class SeaBattleGame {
         for (int i = 0; i < numCols; i++) {
             for (int j = 11; j < 21; j++) {
                 if (maze[i][j] == "S") {
-                    compWin = false;
+                    compHasShip = true;
                 }
             }
         }
         int res = 0;
-        if (playerWin) {
+        if (!playerHasShip) {
             res = 1;
-        } else if(compWin){
-            res = 0;
+        } else if(!compHasShip){
+            res = -1;
         }
         return res;
     }
