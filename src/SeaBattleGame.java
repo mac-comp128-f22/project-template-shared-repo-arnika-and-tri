@@ -4,6 +4,7 @@ import edu.macalester.graphics.ui.TextField;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class SeaBattleGame {
@@ -60,9 +61,11 @@ public class SeaBattleGame {
         int col = Integer.parseInt(coordinateField2.getText());
         System.out.println("Num row: " + row);
         System.out.println("Num col: " + col);
-        Cell cell = new Cell(cellSize);
-        cell.getGraphics().setPosition(row * cellSize, col * cellSize);
-        cell.addGraphics(new Shooted(cellSize, cellSize));
+        maze[row][col] = "Shooted";
+        System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+        // Cell cell = new Cell(cellSize);
+        // cell.getGraphics().setPosition(row * cellSize, col * cellSize);
+        // cell.addGraphics(new Shooted(cellSize, cellSize));
     
     
         if (row == 0 && col == 0 ) {
@@ -181,6 +184,8 @@ public class SeaBattleGame {
                 }
             }
         }
+
+        
     }
 
     public static void main(String[] args) {

@@ -17,5 +17,4 @@ public class Shooted extends GraphicsGroup {
         wall.setFillColor(Color.RED);
     }
 
-
 }
