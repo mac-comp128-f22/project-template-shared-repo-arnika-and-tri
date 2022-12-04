@@ -11,12 +11,15 @@ public class SeaBattleGame {
     private static final int CANVAS_WIDTH = 396;
     private static final int CANVAS_HEIGHT = 828;
     private static final int cellSize = 36;
+    private static final int numRows = 21;
+    private static final int numCols = 10;
     private Grid grid;
     private CanvasWindow canvas;
     private HomeScreen screens;
     private String[][] maze;
     private TextField coordinateField1;
     private TextField coordinateField2;
+    
 
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -63,6 +66,9 @@ public class SeaBattleGame {
         System.out.println("Num col: " + col);
         maze[row][col] = "Shooted";
         System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+        Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
+        canvas.add(grid);
+        
         // Cell cell = new Cell(cellSize);
         // cell.getGraphics().setPosition(row * cellSize, col * cellSize);
         // cell.addGraphics(new Shooted(cellSize, cellSize));

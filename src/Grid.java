@@ -42,7 +42,9 @@ public class Grid extends GraphicsGroup {
                     cell.addGraphics(new River(size, size));
                 } else if (type.equals("R")) {
                     cell.addGraphics(new River(size, size));
-                }
+                } else if (type.equals("Shooted")) {
+                    cell.addGraphics(new Shooted(size, size));
+                } 
                 this.add(cell.getGraphics());
                 cells[i][j] = cell;
 
