@@ -1,5 +1,6 @@
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.Point;
 import edu.macalester.graphics.ui.TextField;
 
 import java.awt.Color;
@@ -36,24 +37,24 @@ public class SeaBattleGame {
 
     private void getCoordinates() {
         coordinateField1 = new TextField();
-        coordinateField1.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT / 2 - 2 * coordinateField1.getHeight());
+        coordinateField1.setCenter(5 + coordinateField1.getWidth() / 2, CANVAS_HEIGHT - coordinateField1.getHeight() / 2  - 5);
         canvas.add(coordinateField1);
 
         coordinateField2 = new TextField();
-        coordinateField2.setCenter(CANVAS_WIDTH + 50, CANVAS_HEIGHT / 2 - 20);
+        coordinateField2.setCenter(5 + coordinateField1.getWidth() + coordinateField2.getWidth() / 2, CANVAS_HEIGHT - coordinateField2.getHeight() / 2  - 5);
         canvas.add(coordinateField2);
 
         CustomButton coordinatesButton = new CustomButton("Enter coordinate: ");
-        coordinatesButton.setCenter(CANVAS_WIDTH + 20 + coordinatesButton.getWidth() / 2,
-            CANVAS_HEIGHT / 2 + 7);
+        Point buttonPosition = new Point(40 + coordinateField1.getWidth() + coordinateField2.getWidth() + coordinatesButton.getWidth() / 2,
+        CANVAS_HEIGHT - coordinatesButton.getHeight() / 2  - 5);
+        coordinatesButton.setCenter(buttonPosition);
         canvas.add(coordinatesButton);
 
         Image coordinateImage = new Image("sprite-icons/coordinate-button.png");
-        coordinateImage.setCenter(CANVAS_WIDTH + 20 + coordinatesButton.getWidth() / 2,
-            CANVAS_HEIGHT / 2 + 7);
+        coordinateImage.setCenter(buttonPosition);
         coordinateImage.setScale(0.22);
+        
         canvas.add(coordinateImage);
-
 
         coordinatesButton.onClick(() -> shootMissile());
 
