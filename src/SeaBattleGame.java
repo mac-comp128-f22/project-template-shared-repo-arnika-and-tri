@@ -37,23 +37,26 @@ public class SeaBattleGame {
 
     private void getCoordinates() {
         coordinateField1 = new TextField();
-        coordinateField1.setCenter(5 + coordinateField1.getWidth() / 2, CANVAS_HEIGHT - coordinateField1.getHeight() / 2  - 5);
+        coordinateField1.setCenter(5 + coordinateField1.getWidth() / 2,
+            CANVAS_HEIGHT - coordinateField1.getHeight() / 2 - 5);
         canvas.add(coordinateField1);
 
         coordinateField2 = new TextField();
-        coordinateField2.setCenter(5 + coordinateField1.getWidth() + coordinateField2.getWidth() / 2, CANVAS_HEIGHT - coordinateField2.getHeight() / 2  - 5);
+        coordinateField2.setCenter(5 + coordinateField1.getWidth() + coordinateField2.getWidth() / 2,
+            CANVAS_HEIGHT - coordinateField2.getHeight() / 2 - 5);
         canvas.add(coordinateField2);
 
         CustomButton coordinatesButton = new CustomButton("Enter coordinate: ");
-        Point buttonPosition = new Point(40 + coordinateField1.getWidth() + coordinateField2.getWidth() + coordinatesButton.getWidth() / 2,
-        CANVAS_HEIGHT - coordinatesButton.getHeight() / 2  - 5);
+        Point buttonPosition = new Point(
+            40 + coordinateField1.getWidth() + coordinateField2.getWidth() + coordinatesButton.getWidth() / 2,
+            CANVAS_HEIGHT - coordinatesButton.getHeight() / 2 - 5);
         coordinatesButton.setCenter(buttonPosition);
         canvas.add(coordinatesButton);
 
         Image coordinateImage = new Image("sprite-icons/coordinate-button.png");
         coordinateImage.setCenter(buttonPosition);
         coordinateImage.setScale(0.22);
-        
+
         canvas.add(coordinateImage);
 
         coordinatesButton.onClick(() -> shootMissile());
@@ -70,16 +73,21 @@ public class SeaBattleGame {
         int compRow = 11 + (int) (Math.random() * 10);
         int compCol = (int) (Math.random() * 10);
         System.out.println(compRow + ", " + compCol);
+        while (maze[compCol][compRow] == "Shooted") {
+            compRow = 11 + (int) (Math.random() * 10);
+            compCol = (int) (Math.random() * 10);
+        }
         maze[compCol][compRow] = "Shooted";
+
         System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
         Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
 
         canvas.add(grid);
         System.out.println(checkWin());
         if (checkWin() == 1 || checkWin() == -1) {
-            if(checkWin() == 1){
+            if (checkWin() == 1) {
                 System.out.println("Player Win!");
-            } else{ 
+            } else {
                 System.out.println("Computer Win!");
             }
             canvas.closeWindow();
