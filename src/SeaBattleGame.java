@@ -78,7 +78,7 @@ public class SeaBattleGame {
         if (checkWin() == 1 || checkWin() == -1) {
             if(checkWin() == 1){
                 System.out.println("Player Win!");
-            } else{
+            } else{ 
                 System.out.println("Computer Win!");
             }
             canvas.closeWindow();
