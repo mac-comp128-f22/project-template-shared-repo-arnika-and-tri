@@ -6,6 +6,8 @@ import edu.macalester.graphics.ui.TextField;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class SeaBattleGame {
@@ -14,12 +16,21 @@ public class SeaBattleGame {
     private static final int cellSize = 36;
     private static final int numRows = 21;
     private static final int numCols = 10;
+
     private Grid grid;
     private CanvasWindow canvas;
     private HomeScreen screens;
+
     private String[][] maze;
+    private int[][] playerBoard;
+    private int[][] opponentBoard;
+
     private TextField coordinateField1;
     private TextField coordinateField2;
+    
+    
+    private Map<String,  Cell> shipCoordinates;
+    private Map<Point, Boolean> shotCoordinates;
 
 
     public SeaBattleGame() {
@@ -27,6 +38,8 @@ public class SeaBattleGame {
         canvas.setBackground(Color.GRAY);
         screens = new HomeScreen(canvas, this);
         screens.homeScreen();
+        shotCoordinates = new HashMap<>();
+        shipCoordinates = new HashMap<>();
     }
 
     public void playingScreen() {
@@ -63,27 +76,43 @@ public class SeaBattleGame {
 
     }
 
-    private void shootMissile() {
-        int row = Integer.parseInt(coordinateField1.getText());
-        int col = Integer.parseInt(coordinateField2.getText());
-        System.out.println("Num row: " + row);
-        System.out.println("Num col: " + col);
-
-        maze[row][col] = "Shooted";
+    private void computerTurn() {
         int compRow = 11 + (int) (Math.random() * 10);
         int compCol = (int) (Math.random() * 10);
-        System.out.println(compRow + ", " + compCol);
         while (maze[compCol][compRow] == "Shooted") {
             compRow = 11 + (int) (Math.random() * 10);
             compCol = (int) (Math.random() * 10);
         }
         maze[compCol][compRow] = "Shooted";
+        shotCoordinates.put(new Point(compRow, compCol), true);
+    }
 
+    private void playerTurn() {
+        int row = Integer.parseInt(coordinateField1.getText());
+        int col = Integer.parseInt(coordinateField2.getText());
+
+        maze[row][col] = "Shooted";
+        shotCoordinates.put(new Point(row, col), true);
+    }
+
+    private void shootMissile() {
+        playerTurn();
+        computerTurn();
         System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
         Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
 
         canvas.add(grid);
-        System.out.println(checkWin());
+
+        // checking if shotCordinates is right.
+        for (Map.Entry<Point, Boolean> entry : shotCoordinates.entrySet()) {
+            if (entry.getValue().equals(true)) {
+                System.out.println(entry.getKey() + ":" + entry.getValue().toString());
+            }
+        }    
+        gameResult();    
+    }
+
+    private void gameResult() {
         if (checkWin() == 1 || checkWin() == -1) {
             if (checkWin() == 1) {
                 System.out.println("Player Win!");
@@ -93,12 +122,6 @@ public class SeaBattleGame {
             canvas.closeWindow();
             ;
         }
-
-        // Cell cell = new Cell(cellSize);
-        // cell.getGraphics().setPosition(row * cellSize, col * cellSize);
-        // cell.addGraphics(new Shooted(cellSize, cellSize));
-
-
     }
 
     private int checkWin() {
@@ -129,12 +152,12 @@ public class SeaBattleGame {
     }
 
     private void addCoordinateLabels() {
-        Image rowNums = new Image("sprite-icons/row-nums.png");
-        rowNums.setCenter(CANVAS_WIDTH - 17, CANVAS_HEIGHT / 2 - 20);
+        Image rowNums = new Image("sprite-icons/col-nums.png");
+        rowNums.setCenter(CANVAS_WIDTH - 17, CANVAS_HEIGHT / 2 - 230);
         rowNums.setScale(0.4);
         canvas.add(rowNums);
 
-        Image columnLetter = new Image("sprite-icons/column-letters.png");
+        Image columnLetter = new Image("sprite-icons/row-nums.png");
         columnLetter.setCenter(CANVAS_WIDTH / 2 - 20, CANVAS_HEIGHT - columnLetter.getHeight() / 2 - 28);
         columnLetter.setScale(0.4);
         canvas.add(columnLetter);
@@ -150,13 +173,13 @@ public class SeaBattleGame {
     private void generateGrid() {
         int size = 10;
         Random random = new Random();
-        int[][] playerBoard = new int[size][size];
-        int[][] opponentBoard = new int[size][size];
-        ArrayList<int[][]> playerBoards = new ArrayList<int[][]>(2);
-        playerBoards.add(playerBoard);
-        playerBoards.add(opponentBoard);
+        playerBoard = new int[size][size];
+        opponentBoard = new int[size][size];
+        ArrayList<int[][]> gameBoards = new ArrayList<int[][]>(2);
+        gameBoards.add(playerBoard);
+        gameBoards.add(opponentBoard);
 
-        for (int[][] board : playerBoards) {
+        for (int[][] board : gameBoards) {
             for (int i = 5; i > 0; i--) {
                 // start point of the ship and direction
                 int x = random.nextInt(board.length);
@@ -236,10 +259,9 @@ public class SeaBattleGame {
                         maze[i][j] = "S";
                     }
                 }
+                shotCoordinates.put(new Point(i, j), false);
             }
         }
-
-
     }
 
     public static void main(String[] args) {

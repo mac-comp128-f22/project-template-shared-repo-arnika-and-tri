@@ -37,7 +37,7 @@ public class Grid extends GraphicsGroup {
                 if (type.equals("W")) {
                     cell.addGraphics(new Wall(size, size));
                 } else if (type.equals("S")) {
-                    cell.addGraphics(new Ship(3));
+                    cell.addGraphics(new Ship());
                 } else if (type.equals("R")) {
                     cell.addGraphics(new River(size, size));
                 } else if (type.equals("R")) {
