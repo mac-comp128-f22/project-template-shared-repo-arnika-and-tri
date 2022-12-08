@@ -9,7 +9,6 @@ public class Grid extends GraphicsGroup {
     protected double size;
     private SeaBattleGame game;
     public static Cell[][] cells;
-    private GraphicsGroup group;
 
     /**
      * Initializes a grid with a speicified number of rows and columns and overall size.
@@ -50,5 +49,11 @@ public class Grid extends GraphicsGroup {
 
             }
         }
+    }
+
+    public GraphicsGroup setCellGraphics(int row, int col) {
+        cells[row][col].getGraphics().add(new Shooted(size, size));;
+        cells[row][col].getGraphics().setPosition(row * size, col * size);
+        return cells[row][col].getGraphics();
     }
 }

@@ -83,7 +83,7 @@ public class SeaBattleGame {
             compRow = 11 + (int) (Math.random() * 10);
             compCol = (int) (Math.random() * 10);
         }
-        maze[compCol][compRow] = "Shooted";
+        canvas.add(grid.setCellGraphics(compCol, compRow));
         shotCoordinates.put(new Point(compRow, compCol), true);
     }
 
@@ -91,7 +91,7 @@ public class SeaBattleGame {
         int row = Integer.parseInt(coordinateField1.getText());
         int col = Integer.parseInt(coordinateField2.getText());
 
-        maze[row][col] = "Shooted";
+        canvas.add(grid.setCellGraphics(row, col));
         shotCoordinates.put(new Point(row, col), true);
     }
 
@@ -99,9 +99,6 @@ public class SeaBattleGame {
         playerTurn();
         computerTurn();
         System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
-        Grid grid = new Grid(numCols, numRows, cellSize, maze, this);
-
-        canvas.add(grid);
 
         // checking if shotCordinates is right.
         for (Map.Entry<Point, Boolean> entry : shotCoordinates.entrySet()) {
