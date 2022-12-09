@@ -3,7 +3,7 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 
 /**
- * Represents a single cell in the maze's grid.
+ * Represents a single cell within the maze's grid.
  */
 public class Cell {
     private GraphicsGroup graphics;

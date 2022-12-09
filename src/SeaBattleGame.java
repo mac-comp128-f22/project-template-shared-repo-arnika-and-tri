@@ -18,7 +18,7 @@ public class SeaBattleGame {
     private Grid grid;
     private CanvasWindow canvas;
     private GameGUI screens;
-    private String[][] shipLocations;
+    private String[][] populatedGrid;
     private Map<String, Map<String, ArrayList<Point>>> shipCoordinates;
     private Map<Point, Boolean> shotCoordinates;
 
@@ -48,12 +48,12 @@ public class SeaBattleGame {
             col = (int) (Math.random() * 10);
             coordinates = new Point(col, row);
         }
-        if (shipLocations[col][row].equals("S") || shipLocations[col][row].equals("C")) {
+        if (populatedGrid[col][row].equals("S") || populatedGrid[col][row].equals("C")) {
             canvas.add(grid.setCellGraphics(col, row, "C"));
-            shipLocations[col][row] = "C";
+            populatedGrid[col][row] = "C";
         } else {
             canvas.add(grid.setCellGraphics(col, row, "W"));
-            shipLocations[col][row] = "W";
+            populatedGrid[col][row] = "W";
         }
         shotCoordinates.put(new Point(col, row), true);
     }
@@ -65,15 +65,13 @@ public class SeaBattleGame {
         int col = Integer.parseInt(screens.coordinateField1.getText());
         int row = Integer.parseInt(screens.coordinateField2.getText());
         shotCoordinates.put(new Point(col, row + 11), true);
-        if (shipLocations[col][row + 11].equals("S") || shipLocations[col][row + 11].equals("C")) {
+        if (populatedGrid[col][row + 11].equals("S") || populatedGrid[col][row + 11].equals("C")) {
             canvas.add(grid.setCellGraphics(col, row + 11, "C"));
-            shipLocations[col][row + 11] = "C";
+            populatedGrid[col][row + 11] = "C";
         } else {
             canvas.add(grid.setCellGraphics(col, row + 11, "W"));
-            shipLocations[col][row + 11] = "W";
+            populatedGrid[col][row + 11] = "W";
         }
-
-
     }
 
     /***
@@ -81,19 +79,17 @@ public class SeaBattleGame {
      */
     public void shootMissile() {
         playerTurn();
-        // need a pause
         if (youWin()) {
             screens.winMessage();
         }
         computerTurn();
-        // need a pause
         if (youLose()) {
             screens.loseMessage();
         }
     }
 
     /***
-     * Check if the player has won by checking if all of the opponent's ships have been hit.
+     * Checks if the player has won by checking if all of the opponent's ships have been hit.
      */
     public boolean youWin() {
         for (int i = 1; i < shipCoordinates.get("Opponent Ships").size() + 1; i++) {
@@ -109,7 +105,7 @@ public class SeaBattleGame {
     }
 
     /***
-     * Check if the player has lost by checking if all of their ships have been hit.
+     * Checks if the player has lost by checking if all of their ships have been hit.
      */
     public boolean youLose() {
         for (int i = 1; i < shipCoordinates.get("Player Ships").size() + 1; i++) {
@@ -125,12 +121,12 @@ public class SeaBattleGame {
     }
 
     /***
-     * Create the grid and adds it to the Canvas.
+     * Create the grid using random locations of the ships and adds it to the canvas.
      */
     public void generateGrid() {
         populateGrid();
         canvas.draw();
-        grid = new Grid(numCols, numRows, cellSize, shipLocations);
+        grid = new Grid(numCols, numRows, cellSize, populatedGrid);
         canvas.add(grid);
     }
 
@@ -222,22 +218,22 @@ public class SeaBattleGame {
             }
         }
 
-        shipLocations = new String[numCols][numRows];
+        populatedGrid = new String[numCols][numRows];
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
                 if (j < 10) {
                     if (opponentBoard[i][j] == 0 || opponentBoard[i][j] == 9) {
-                        shipLocations[i][j] = "R";
+                        populatedGrid[i][j] = "R";
                     } else {
-                        shipLocations[i][j] = "S";
+                        populatedGrid[i][j] = "S";
                     }
                 } else if (j == 10) {
-                    shipLocations[i][j] = "W";
+                    populatedGrid[i][j] = "W";
                 } else {
                     if (playerBoard[i][j - 11] == 0 || playerBoard[i][j - 11] == 9) {
-                        shipLocations[i][j] = "R";
+                        populatedGrid[i][j] = "R";
                     } else {
-                        shipLocations[i][j] = "S";
+                        populatedGrid[i][j] = "S";
                     }
                 }
                 shotCoordinates.put(new Point(i, j), false);

@@ -9,8 +9,8 @@ import edu.macalester.graphics.Rectangle;
 public class CorrectShot extends GraphicsGroup {
 
     /***
-     * Constructs a sqaure of specified width/height with green color, which represents a proper shoot on
-     * the ship.
+     * Constructs a sqaure of specified width/height with green color, which represents a correct hit of
+     * a ship.
      */
     public CorrectShot(double size) {
         Rectangle hitSquare = new Rectangle(0, 0, size, size);

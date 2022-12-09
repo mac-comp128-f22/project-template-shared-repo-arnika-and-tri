@@ -15,13 +15,16 @@ public class GameGUI {
     public TextField coordinateField1;
     public TextField coordinateField2;
 
+    /**
+     * Initializes the screens of the game.
+     */
     public GameGUI(CanvasWindow canvas, SeaBattleGame game) {
         this.canvas = canvas;
         this.game = game;
     }
 
     /**
-     * Show the homescreen, which appears before starting the game.
+     * Creates the homescreen, which appears when running the game.
      */
     public void homeScreen() {
         playButton();
@@ -33,7 +36,8 @@ public class GameGUI {
      */
     private void playingScreen() {
         game.generateGrid();
-        coordinateButtons();
+        inputFields();
+        shootButton();
         coordinateLabels();
     }
 
@@ -69,8 +73,7 @@ public class GameGUI {
     }
 
     /**
-     * Creates coordinateLabels which show the numbers from 0 to 9 in both row and column on computer
-     * board.
+     * Creates coordinate labels which denote the row and column of the opponent's board coordinates.
      */
     private void coordinateLabels() {
         Image rowNums = new Image("sprite-icons/col-nums.png");
@@ -85,10 +88,9 @@ public class GameGUI {
     }
 
     /**
-     * Creates two text boxes to receive the row and column number after the user type in, then a shoot
-     * button to start shooting.
+     * Creates two text fields to receive the row and column number of the square the user wants to hit. 
      */
-    private void coordinateButtons() {
+    private void inputFields() {
         coordinateField1 = new TextField();
         coordinateField1.setCenter(5 + coordinateField1.getWidth() / 2,
             CANVAS_HEIGHT - coordinateField1.getHeight() / 2 - 5);
@@ -98,7 +100,12 @@ public class GameGUI {
         coordinateField2.setCenter(5 + coordinateField1.getWidth() + coordinateField2.getWidth() / 2,
             CANVAS_HEIGHT - coordinateField2.getHeight() / 2 - 5);
         canvas.add(coordinateField2);
+    }
 
+    /**
+     * Creates a button, that when clicked, 1. shoots the cell corresponding with the user input from the text fields and 2. triggers the computer move.
+     */
+    private void shootButton() {
         CustomButton coordinatesButton = new CustomButton("Enter coordinate: ");
         Point buttonPosition = new Point(
             40 + coordinateField1.getWidth() + coordinateField2.getWidth() + coordinatesButton.getWidth() / 2,
