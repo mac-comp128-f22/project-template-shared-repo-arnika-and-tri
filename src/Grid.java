@@ -53,10 +53,6 @@ public class Grid extends GraphicsGroup {
     }
 
     public GraphicsGroup setCellGraphics(int row, int col, String type) {
-        // Rectangle shot = new Rectangle(row * size, col * size, size, size);
-        // shot.setFillColor(Color.RED);
-        // cells[row][col].getGraphics().add(shot);
-
         if (type.equals("R")) {
             cells[row][col].getGraphics().add(new RightShooted(size, size));
         } else if (type.equals("W")) {
