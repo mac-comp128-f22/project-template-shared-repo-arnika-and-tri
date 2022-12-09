@@ -45,18 +45,23 @@ public class Grid extends GraphicsGroup {
                     cell.addGraphics(new River(size, size));
                 } else if (type.equals("R")) {
                     cell.addGraphics(new River(size, size));
-                } 
+                }
                 this.add(cell.getGraphics());
                 cells[i][j] = cell;
             }
         }
     }
 
-    public GraphicsGroup setCellGraphics(int row, int col) {
+    public GraphicsGroup setCellGraphics(int row, int col, String type) {
         // Rectangle shot = new Rectangle(row * size, col * size, size, size);
         // shot.setFillColor(Color.RED);
         // cells[row][col].getGraphics().add(shot);
-        cells[row][col].getGraphics().add(new Shooted(size, size));
+
+        if (type.equals("R")) {
+            cells[row][col].getGraphics().add(new RightShooted(size, size));
+        } else if (type.equals("W")) {
+            cells[row][col].getGraphics().add(new WrongShooted(size, size));
+        }
         cells[row][col].getGraphics().setPosition(row * size, col * size);
         return cells[row][col].getGraphics();
     }

@@ -6,15 +6,18 @@ import edu.macalester.graphics.Rectangle;
 /**
  * Represents a single wall that forms that game's maze.
  */
-public class Shooted extends GraphicsGroup {
+public class RightShooted extends GraphicsGroup {
     public Rectangle wall;
+
     /***
      * Constructs a wall of specified width/height.
      */
-    public Shooted(double wallWidth, double wallHeight) {
+    public RightShooted(double wallWidth, double wallHeight) {
         this.wall = new Rectangle(0, 0, wallWidth, wallHeight);
         this.add(wall);
-        wall.setFillColor(Color.RED);
+        wall.setFillColor(Color.GREEN);
+
+
     }
 
 }

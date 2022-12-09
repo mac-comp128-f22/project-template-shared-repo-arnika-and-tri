@@ -3,6 +3,7 @@ import edu.macalester.graphics.Point;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class SeaBattleGame {
     private CanvasWindow canvas;
     private GameGUI screens;
     private String[][] maze;
-    private Map<String,  Map<String, ArrayList<Point>>> shipCoordinates;
+    private Map<String, Map<String, ArrayList<Point>>> shipCoordinates;
     private Map<Point, Boolean> shotCoordinates;
 
 
@@ -38,21 +39,35 @@ public class SeaBattleGame {
             compCol = (int) (Math.random() * 10);
             coordinates = new Point(compCol, compRow);
         }
-        canvas.add(grid.setCellGraphics(compCol, compRow));
+        if (maze[compCol][compRow].equals("S") || maze[compCol][compRow].equals("RightShooted")) {
+            canvas.add(grid.setCellGraphics(compCol, compRow, "R"));
+            maze[compCol][compRow] = "RightShooted";
+        } else {
+            canvas.add(grid.setCellGraphics(compCol, compRow, "W"));
+            maze[compCol][compRow] = "WrongShooted";
+        }
         shotCoordinates.put(new Point(compCol, compRow), true);
+        System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
     }
 
     private void playerTurn() {
         int col = Integer.parseInt(screens.coordinateField1.getText());
         int row = Integer.parseInt(screens.coordinateField2.getText());
-
-        canvas.add(grid.setCellGraphics(col, row + 11));
         shotCoordinates.put(new Point(col, row + 11), true);
+        if (maze[col][row].equals("S") || maze[col][row].equals("RightShooted")) {
+            canvas.add(grid.setCellGraphics(col, row + 11, "R"));
+            maze[col][row] = "RightShooted";
+        } else {
+            canvas.add(grid.setCellGraphics(col, row + 11, "W"));
+            maze[col][row] = "WrongShooted";
+        }
+
+
     }
 
     public void shootMissile() {
         playerTurn();
-        // need a pause 
+        // need a pause
         if (youWin()) {
             screens.winMessage();
         }
@@ -163,8 +178,7 @@ public class SeaBattleGame {
                     board[y][x] = i;
                     if (board.equals(playerBoard)) {
                         singleShipCoordinates.add(new Point(y, x + 11));
-                    }
-                    else {
+                    } else {
                         singleShipCoordinates.add(new Point(y, x));
                     }
                     if (vertical) {
@@ -181,7 +195,7 @@ public class SeaBattleGame {
                 shipCoordinates.put("Player Ships", boardShips);
             }
         }
-        
+
         maze = new String[numCols][numRows];
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
