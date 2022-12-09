@@ -56,14 +56,10 @@ public class SeaBattleGame {
             computerTurn();
         }
         else if (youLose()) {
-            System.out.println("You Lose");
-            canvas.closeWindow();
-            // display message, end game
+            screens.loseMessage();
         }
         else if (youWin()) {
-            System.out.println("You Win");
-            canvas.closeWindow();
-            // display message, end game
+            screens.winMessage();
         }
     }
 

@@ -95,4 +95,32 @@ public class GameGUI {
         coordinatesButton.onClick(() -> game.shootMissile());
 
     }
+
+    /**
+     * Creates a "win" screen that displays the "you win!" message.
+     */
+    public void winMessage() {
+        canvas.removeAll();
+        Image winImage = new Image("sprite-icons/win-message.png");
+        winImage.setScale(0.8);
+        winImage.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2.5);
+        canvas.add(winImage);
+        canvas.draw();
+        canvas.pause(3000);
+        canvas.closeWindow();
+    }
+
+    /**
+     * Creates a "lose" screen that displays the "you lose" message.
+     */
+    public void loseMessage() {
+        canvas.removeAll();
+        Image loseImage = new Image("sprite-icons/lose-message.png");
+        loseImage.setScale(0.8);
+        loseImage.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2.5);
+        canvas.add(loseImage);
+        canvas.draw();
+        canvas.pause(3000);
+        canvas.closeWindow();
+    }
 }
