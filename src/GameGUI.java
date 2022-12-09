@@ -1,10 +1,12 @@
+import org.w3c.dom.Text;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.ui.TextField;
 
 /**
- * Represents the visual part of the game, with which the user interacts with. 
+ * Represents the visual part of the game, with which the user interacts with.
  */
 public class GameGUI {
     public static final int CANVAS_WIDTH = 396;
@@ -29,6 +31,7 @@ public class GameGUI {
     public void homeScreen() {
         playButton();
         quitButton();
+        instructionsButton();
     }
 
     /**
@@ -88,7 +91,7 @@ public class GameGUI {
     }
 
     /**
-     * Creates two text fields to receive the row and column number of the square the user wants to hit. 
+     * Creates two text fields to receive the row and column number of the square the user wants to hit.
      */
     private void inputFields() {
         coordinateField1 = new TextField();
@@ -103,7 +106,8 @@ public class GameGUI {
     }
 
     /**
-     * Creates a button, that when clicked, 1. shoots the cell corresponding with the user input from the text fields and 2. triggers the computer move.
+     * Creates a button, that when clicked, 1. shoots the cell corresponding with the user input from
+     * the text fields and 2. triggers the computer move.
      */
     private void shootButton() {
         CustomButton coordinatesButton = new CustomButton("Enter coordinate: ");
@@ -149,5 +153,51 @@ public class GameGUI {
         canvas.draw();
         canvas.pause(3000);
         canvas.closeWindow();
+    }
+
+    /**
+     * Creates the "how to play" screen that displays both the game's instructions, and a button to
+     * return to the main home screen.
+     */
+    private void instructionsScreen() {
+        Image instructionsText = new Image("sprite-icons/instructions-text.png");
+        instructionsText.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2);
+        instructionsText.setScale(0.4);
+        canvas.add(instructionsText);
+        returnButton();
+    }
+
+    /**
+     * Create a "how to play" button that when clicked, enters the "how to play" screen.
+     */
+    private void instructionsButton() {
+        CustomButton instructionButton = new CustomButton("HOW TO PLAY");
+        instructionButton.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2 + 70);
+        Image instructionImage = new Image("sprite-icons/instructions.png");
+        instructionImage.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2 + 70);
+        instructionImage.setScale(0.4);
+        canvas.add(instructionImage);
+        canvas.add(instructionButton);
+        instructionButton.onClick(() -> {
+            canvas.removeAll();
+            instructionsScreen();
+        });
+    }
+
+    /**
+     * Creates a "return" button that when clicked, returns the user to the main home screen.
+     */
+    private void returnButton() {
+        CustomButton returnButton = new CustomButton("RETURN TO WELCOME SCREEN");
+        returnButton.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2 + 200);
+        Image returnImage = new Image("sprite-icons/return.png");
+        returnImage.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2 + 200);
+        returnImage.setScale(0.3);
+        canvas.add(returnImage);
+        canvas.add(returnButton);
+        returnButton.onClick(() -> {
+            canvas.removeAll();
+            homeScreen();
+        });
     }
 }
