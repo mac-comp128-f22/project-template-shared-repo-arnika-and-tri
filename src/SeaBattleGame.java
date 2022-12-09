@@ -15,13 +15,8 @@ public class SeaBattleGame {
     private Grid grid;
     private CanvasWindow canvas;
     private GameGUI screens;
-
     private String[][] maze;
-    private int[][] playerBoard;
-    private int[][] opponentBoard;
-    
-    
-    private Map<String,  Map<String, Point>> shipCoordinates;
+    private Map<String,  Map<String, ArrayList<Point>>> shipCoordinates;
     private Map<Point, Boolean> shotCoordinates;
 
 
@@ -56,22 +51,26 @@ public class SeaBattleGame {
     }
 
     public void shootMissile() {
-        // while ships not left do this
-        playerTurn();
-        computerTurn();
-        // else end game  
-        gameResult();    
+        if (!youLose() && !youWin()) {
+            playerTurn();
+            computerTurn();
+        }
+        else if (youLose()) {
+            // display message, end game
+        }
+        else if (youWin()) {
+            // display message, end game
+        }
     }
 
-    private void gameResult() {
-        if (checkWin() == 1 || checkWin() == -1) {
-            if (checkWin() == 1) {
-                System.out.println("Player Win!");
-            } else {
-                System.out.println("Computer Win!");
-            }
-            canvas.closeWindow();
-        }
+    public boolean youWin() {
+        // if all their ships are hit, return true
+        return false;
+    }
+
+    public boolean youLose() {
+        // if all your ships are hit, return true 
+        return false;
     }
 
     private int checkWin() {
@@ -114,13 +113,14 @@ public class SeaBattleGame {
     private void populateGrid() {
         int size = 10;
         Random random = new Random();
-        playerBoard = new int[size][size];
-        opponentBoard = new int[size][size];
+        int[][] playerBoard = new int[size][size];
+        int[][] opponentBoard = new int[size][size];
         ArrayList<int[][]> gameBoards = new ArrayList<int[][]>(2);
         gameBoards.add(playerBoard);
         gameBoards.add(opponentBoard);
 
         for (int[][] board : gameBoards) {
+            Map<String, ArrayList<Point>> boardShips = new HashMap<>();
             for (int i = 5; i > 0; i--) {
                 // start point of the ship and direction
                 int x = random.nextInt(board.length);
@@ -172,16 +172,26 @@ public class SeaBattleGame {
                     }
                 }
                 // fill in the ship cells
+                ArrayList<Point> singleShipCoordinates = new ArrayList<>(i - 1);
                 for (int j = 0; j < i; j++) {
                     board[y][x] = i;
+                    if (board == playerBoard) {
+                        singleShipCoordinates.add(new Point(y, x));
+                    }
+                    else {
+                        singleShipCoordinates.add(new Point(y, x + 11));
+                    }
                     if (vertical) {
                         y++;
                     } else {
                         x++;
                     }
                 }
+                boardShips.put("Ship Lenght:" + i, singleShipCoordinates);
             }
+            shipCoordinates.put("board", boardShips);
         }
+
         maze = new String[numCols][numRows];
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
