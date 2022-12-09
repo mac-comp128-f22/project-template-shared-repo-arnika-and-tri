@@ -33,7 +33,7 @@ public class GameGUI {
         playButton.setCenter(canvas.getWidth() / 2 - 100, canvas.getHeight() / 2 + 10);
         Image playImage = new Image("sprite-icons/play.png");
         playImage.setCenter(canvas.getWidth() / 2 - 100, canvas.getHeight() / 2 + 10);
-        playImage.setScale(0.3);
+        playImage.setScale(0.5);
         canvas.add(playImage);
         canvas.add(playButton);
         playButton.onClick(() -> {
@@ -50,7 +50,7 @@ public class GameGUI {
         quitButton.setCenter(canvas.getWidth() / 2 + 100, canvas.getHeight() / 2 + 10);
         Image quitImage = new Image("sprite-icons/quit.png");
         quitImage.setCenter(canvas.getWidth() / 2 + 100, canvas.getHeight() / 2 + 10);
-        quitImage.setScale(0.3);
+        quitImage.setScale(0.5);
         canvas.add(quitImage);
         canvas.add(quitButton);
         quitButton.onClick(() -> canvas.closeWindow());

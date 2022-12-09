@@ -53,7 +53,7 @@ public class SeaBattleGame {
     public void shootMissile() {
         if (!youLose() && !youWin()) {
             playerTurn();
-            computerTurn();
+            computerTurn(); 
         }
         else if (youLose()) {
             screens.loseMessage();
@@ -67,10 +67,12 @@ public class SeaBattleGame {
         for (int i = 1; i < shipCoordinates.get("Opponent Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Opponent Ships").get("Ship Length:" + i)) {
                 if (!shotCoordinates.get(point)) {
+                    //System.out.println(point);
                     return false;
                 }
             }
         }
+        System.out.println("------------");
         return true;
     }
 
@@ -78,42 +80,14 @@ public class SeaBattleGame {
         for (int i = 1; i < shipCoordinates.get("Player Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Player Ships").get("Ship Length:" + i)) {
                 if (!shotCoordinates.get(point)) {
+                    //System.out.println(point);
                     return false;
                 }
             }
         }
+        System.out.println("------------");
         return true;
     }
-
-    private int checkWin() {
-        // TODO: update this method to use shotCoordinates
-        boolean playerHasShip = false;
-        boolean compHasShip = false;
-        for (int i = 0; i < numCols; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (maze[i][j] == "S") {
-                    playerHasShip = true;
-                }
-            }
-        }
-
-        for (int i = 0; i < numCols; i++) {
-            for (int j = 11; j < 21; j++) {
-                if (maze[i][j] == "S") {
-                    compHasShip = true;
-                }
-            }
-        }
-        int res = 0;
-        if (!playerHasShip) {
-            res = 1;
-        } else if (!compHasShip) {
-            res = -1;
-        }
-        return res;
-    }
-
-
 
     public void generateGrid() {
         populateGrid();
@@ -187,11 +161,11 @@ public class SeaBattleGame {
                 ArrayList<Point> singleShipCoordinates = new ArrayList<>(i - 1);
                 for (int j = 0; j < i; j++) {
                     board[y][x] = i;
-                    if (board == playerBoard) {
-                        singleShipCoordinates.add(new Point(y, x));
+                    if (board.equals(playerBoard)) {
+                        singleShipCoordinates.add(new Point(y, x + 11));
                     }
                     else {
-                        singleShipCoordinates.add(new Point(y, x + 11));
+                        singleShipCoordinates.add(new Point(y, x));
                     }
                     if (vertical) {
                         y++;
@@ -201,10 +175,10 @@ public class SeaBattleGame {
                 }
                 boardShips.put("Ship Length:" + i, singleShipCoordinates);
             }
-            if (board == playerBoard) {
-                shipCoordinates.put("Player Ships", boardShips);
-            } else {
+            if (board.equals(playerBoard)) {
                 shipCoordinates.put("Opponent Ships", boardShips);
+            } else {
+                shipCoordinates.put("Player Ships", boardShips);
             }
         }
         
@@ -229,6 +203,7 @@ public class SeaBattleGame {
                 shotCoordinates.put(new Point(i, j), false);
             }
         }
+        System.out.println(shipCoordinates.toString());
     }
 
     public static void main(String[] args) {
