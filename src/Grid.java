@@ -1,7 +1,6 @@
 import java.awt.Color;
 
 import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.Rectangle;
 
 /**
  * Represents a grid of cells that is populated to form the maze and all its elements (coins,
@@ -38,6 +37,8 @@ public class Grid extends GraphicsGroup {
                 cell.getGraphics().setPosition(i * size, j * size);
                 if (type.equals("W")) {
                     cell.addGraphics(new Wall(size, size));
+                } else if (type.equals("S") && j > 10) {
+                    cell.addGraphics(new River(size, size));
                 } else if (type.equals("S")) {
                     cell.addGraphics(new Ship());
                 } else if (type.equals("R")) {
