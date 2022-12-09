@@ -9,7 +9,7 @@ import edu.macalester.graphics.Rectangle;
 public class River extends GraphicsGroup {
 
     /***
-     * Constructs a sqaure of specified width/height with blue color, which represents the river. 
+     * Constructs a sqaure of specified width/height with blue color, which represents the river.
      */
     public River(double size) {
         Rectangle river = new Rectangle(0, 0, size, size);

@@ -1,5 +1,3 @@
-import org.w3c.dom.Text;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;

@@ -9,7 +9,7 @@ import edu.macalester.graphics.Rectangle;
 public class WrongShot extends GraphicsGroup {
 
     /***
-     * Constructs a sqaure of specified width/height with red color, which represents an incorrect hit. 
+     * Constructs a sqaure of specified width/height with red color, which represents an incorrect hit.
      */
     public WrongShot(double size) {
         Rectangle hitSquare = new Rectangle(0, 0, size, size);

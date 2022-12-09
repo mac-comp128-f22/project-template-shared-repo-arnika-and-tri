@@ -75,7 +75,8 @@ public class SeaBattleGame {
     }
 
     /***
-     * A single turn of the game, including both the player and computer movements and checking if the game is finished or not. 
+     * A single turn of the game, including both the player and computer movements and checking if the
+     * game is finished or not.
      */
     public void shootMissile() {
         playerTurn();

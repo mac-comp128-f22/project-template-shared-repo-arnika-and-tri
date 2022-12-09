@@ -7,7 +7,7 @@ import edu.macalester.graphics.Rectangle;
  * A single cell representing the wall between the player and opponent ships.
  */
 public class Wall extends GraphicsGroup {
-    
+
     /***
      * Constructs a square of specified width/height, colored black.
      */
