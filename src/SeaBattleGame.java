@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * The main class of the game of SeaBattle that handles the logic and running of the game.
+ */
 public class SeaBattleGame {
     private static final int cellSize = 36;
     private static final int numRows = 21;
@@ -21,8 +24,8 @@ public class SeaBattleGame {
     private Map<Point, Boolean> shotCoordinates;
 
 
-    /***
-     * Constructs a wall of specified width/height, which represents the ship.
+    /**
+     * Initializes a game of SeaBattle, displaying its main screen.
      */
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", GameGUI.CANVAS_WIDTH, GameGUI.CANVAS_HEIGHT);
@@ -58,7 +61,7 @@ public class SeaBattleGame {
     }
 
     /***
-     * The player's shooting turn generates random coordinates to hit on the computer's board.
+     * The player's shooting turn takes in user input to hit the computer's ships.
      */
     private void playerTurn() {
         int col = Integer.parseInt(screens.coordinateField1.getText());
@@ -76,7 +79,7 @@ public class SeaBattleGame {
     }
 
     /***
-     * The player's shooting turn generates random coordinates to hit on the computer's board.
+     * A single turn of the game, including both the player and computer movements and checking if the game is finished or not. 
      */
     public void shootMissile() {
         playerTurn();
@@ -245,6 +248,9 @@ public class SeaBattleGame {
         System.out.println(shipCoordinates.toString());
     }
 
+    /**
+     * Click here to run the game.
+     */
     public static void main(String[] args) {
         new SeaBattleGame();
     }

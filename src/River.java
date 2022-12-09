@@ -4,12 +4,13 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 
 /**
- * Represents a single wall that forms that game's maze.
+ * A single cell representing the river.
  */
 public class River extends GraphicsGroup {
     public Rectangle river;
+
     /***
-     * Constructs a wall of specified width/height, which represents the river.
+     * Constructs a sqaure of specified width/height with blue color, which represents the river. 
      */
     public River(double riverWidth, double riverHeight) {
         river = new Rectangle(0, 0, riverWidth, riverHeight);

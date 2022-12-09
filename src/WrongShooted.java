@@ -4,13 +4,13 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 
 /**
- * Represents a single wall that forms that game's maze.
+ * Represents a cell holding an instance of the river that has been hit.
  */
 public class WrongShooted extends GraphicsGroup {
     public Rectangle wall;
 
     /***
-     * Constructs a wall of specified width/height, which represents a wrong shoot.
+     * Constructs a sqaure of specified width/height with red color, which represents an incorrect hit. 
      */
     public WrongShooted(double wallWidth, double wallHeight) {
         this.wall = new Rectangle(0, 0, wallWidth, wallHeight);

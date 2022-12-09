@@ -2,10 +2,13 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Rectangle;
 import java.awt.Color;
 
+/**
+ * A single cell representing a part of the ship.
+ */
 public class Ship extends GraphicsGroup {
 
     /***
-     * Constructs a wall of specified width/height, which represents the ship.
+     * Constructs a square of specified width/height, which represents the ship.
      */
     public Ship() {
         super();
@@ -15,10 +18,4 @@ public class Ship extends GraphicsGroup {
         wall.setFillColor(Color.GRAY);
         wall.setStrokeColor(Color.BLACK);
     }
-
-    /*
-     * There will be 10 ships. 1 four length, 2 three length, 3 two length, 4 one length
-     * The ships need randomly generated coordinates and direction such that it is not placed on another ship, or adjecent to another ship
-     * 
-     */
 }

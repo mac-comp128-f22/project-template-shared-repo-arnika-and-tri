@@ -3,6 +3,9 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.ui.TextField;
 
+/**
+ * Represents the visual part of the game, with which the user interacts with. 
+ */
 public class GameGUI {
     public static final int CANVAS_WIDTH = 396;
     public static final int CANVAS_HEIGHT = 828;
