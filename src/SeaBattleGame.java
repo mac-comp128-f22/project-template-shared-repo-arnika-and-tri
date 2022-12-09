@@ -3,7 +3,6 @@ import edu.macalester.graphics.Point;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -19,7 +18,7 @@ public class SeaBattleGame {
     private Grid grid;
     private CanvasWindow canvas;
     private GameGUI screens;
-    private String[][] maze;
+    private String[][] shipLocations;
     private Map<String, Map<String, ArrayList<Point>>> shipCoordinates;
     private Map<Point, Boolean> shotCoordinates;
 
@@ -41,22 +40,22 @@ public class SeaBattleGame {
      * Computer shooting turn, which generate a random coordinates to shoot on the player board.
      */
     private void computerTurn() {
-        int compRow = (int) (Math.random() * 10);
-        int compCol = (int) (Math.random() * 10);
-        Point coordinates = new Point(compCol, compRow);
+        int row = (int) (Math.random() * 10);
+        int col = (int) (Math.random() * 10);
+        Point coordinates = new Point(col, row);
         while (shotCoordinates.get(coordinates)) {
-            compRow = (int) (Math.random() * 10);
-            compCol = (int) (Math.random() * 10);
-            coordinates = new Point(compCol, compRow);
+            row = (int) (Math.random() * 10);
+            col = (int) (Math.random() * 10);
+            coordinates = new Point(col, row);
         }
-        if (maze[compCol][compRow].equals("S") || maze[compCol][compRow].equals("C")) {
-            canvas.add(grid.setCellGraphics(compCol, compRow, "C"));
-            maze[compCol][compRow] = "C";
+        if (shipLocations[col][row].equals("S") || shipLocations[col][row].equals("C")) {
+            canvas.add(grid.setCellGraphics(col, row, "C"));
+            shipLocations[col][row] = "C";
         } else {
-            canvas.add(grid.setCellGraphics(compCol, compRow, "W"));
-            maze[compCol][compRow] = "W";
+            canvas.add(grid.setCellGraphics(col, row, "W"));
+            shipLocations[col][row] = "W";
         }
-        shotCoordinates.put(new Point(compCol, compRow), true);
+        shotCoordinates.put(new Point(col, row), true);
     }
 
     /***
@@ -66,12 +65,12 @@ public class SeaBattleGame {
         int col = Integer.parseInt(screens.coordinateField1.getText());
         int row = Integer.parseInt(screens.coordinateField2.getText());
         shotCoordinates.put(new Point(col, row + 11), true);
-        if (maze[col][row + 11].equals("S") || maze[col][row + 11].equals("C")) {
+        if (shipLocations[col][row + 11].equals("S") || shipLocations[col][row + 11].equals("C")) {
             canvas.add(grid.setCellGraphics(col, row + 11, "C"));
-            maze[col][row + 11] = "C";
+            shipLocations[col][row + 11] = "C";
         } else {
             canvas.add(grid.setCellGraphics(col, row + 11, "W"));
-            maze[col][row + 11] = "W";
+            shipLocations[col][row + 11] = "W";
         }
 
 
@@ -131,7 +130,7 @@ public class SeaBattleGame {
     public void generateGrid() {
         populateGrid();
         canvas.draw();
-        grid = new Grid(numCols, numRows, cellSize, maze, this);
+        grid = new Grid(numCols, numRows, cellSize, shipLocations);
         canvas.add(grid);
     }
 
@@ -223,28 +222,27 @@ public class SeaBattleGame {
             }
         }
 
-        maze = new String[numCols][numRows];
+        shipLocations = new String[numCols][numRows];
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
                 if (j < 10) {
                     if (opponentBoard[i][j] == 0 || opponentBoard[i][j] == 9) {
-                        maze[i][j] = "R";
+                        shipLocations[i][j] = "R";
                     } else {
-                        maze[i][j] = "S";
+                        shipLocations[i][j] = "S";
                     }
                 } else if (j == 10) {
-                    maze[i][j] = "W";
+                    shipLocations[i][j] = "W";
                 } else {
                     if (playerBoard[i][j - 11] == 0 || playerBoard[i][j - 11] == 9) {
-                        maze[i][j] = "R";
+                        shipLocations[i][j] = "R";
                     } else {
-                        maze[i][j] = "S";
+                        shipLocations[i][j] = "S";
                     }
                 }
                 shotCoordinates.put(new Point(i, j), false);
             }
         }
-        System.out.println(shipCoordinates.toString());
     }
 
     /**

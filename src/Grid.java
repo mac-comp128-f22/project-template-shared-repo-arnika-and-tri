@@ -9,18 +9,16 @@ import edu.macalester.graphics.GraphicsGroup;
 public class Grid extends GraphicsGroup {
     protected int numRows, numCols;
     protected double size;
-    private SeaBattleGame game;
     public static Cell[][] cells;
 
     /**
      * Initializes a grid with a speicified number of rows and columns and overall size.
      */
-    public Grid(int numCols, int numRows, int size, String[][] maze,
-        SeaBattleGame game) {
+    public Grid(int numCols, int numRows, int size, String[][] maze) {
         this.numRows = numRows;
         this.numCols = numCols;
         this.size = size;
-        this.game = game;
+        // this.game = game;
         createGrid(maze);
     }
 
@@ -36,13 +34,13 @@ public class Grid extends GraphicsGroup {
                 Cell cell = new Cell(size);
                 cell.getGraphics().setPosition(i * size, j * size);
                 if (type.equals("W")) {
-                    cell.addGraphics(new Wall(size, size));
+                    cell.addGraphics(new Wall(size));
                 } else if (type.equals("S") && j > 10) {
-                    cell.addGraphics(new River(size, size));
+                    cell.addGraphics(new River(size));
                 } else if (type.equals("S")) {
-                    cell.addGraphics(new Ship());
+                    cell.addGraphics(new Ship(size));
                 } else if (type.equals("R")) {
-                    cell.addGraphics(new River(size, size));
+                    cell.addGraphics(new River(size));
                 }
                 this.add(cell.getGraphics());
                 cells[i][j] = cell;
@@ -51,14 +49,14 @@ public class Grid extends GraphicsGroup {
     }
 
     /**
-     * Change the cell status after being shot by a missile. It can be a right shoot
+     * Change the cell status after being shot by a missile. It can be a correct shot
      *  if that shoot is on the ship, and wrong shoot if on the river
      */
     public GraphicsGroup setCellGraphics(int row, int col, String type) {
         if (type.equals("C")) { // correct shooting
-            cells[row][col].getGraphics().add(new RightShooted(size, size));
+            cells[row][col].getGraphics().add(new CorrectShot(size));
         } else if (type.equals("W")) {
-            cells[row][col].getGraphics().add(new WrongShooted(size, size));
+            cells[row][col].getGraphics().add(new WrongShot(size));
         }
         cells[row][col].getGraphics().setPosition(row * size, col * size);
         return cells[row][col].getGraphics();

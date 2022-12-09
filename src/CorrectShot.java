@@ -6,17 +6,16 @@ import edu.macalester.graphics.Rectangle;
 /**
  * Represents a cell holding a ship that has been hit.
  */
-public class RightShooted extends GraphicsGroup {
-    public Rectangle wall;
+public class CorrectShot extends GraphicsGroup {
 
     /***
      * Constructs a sqaure of specified width/height with green color, which represents a proper shoot on
      * the ship.
      */
-    public RightShooted(double wallWidth, double wallHeight) {
-        this.wall = new Rectangle(0, 0, wallWidth, wallHeight);
-        this.add(wall);
-        wall.setFillColor(Color.GREEN);
+    public CorrectShot(double size) {
+        Rectangle hitSquare = new Rectangle(0, 0, size, size);
+        this.add(hitSquare);
+        hitSquare.setFillColor(Color.GREEN);
 
 
     }
