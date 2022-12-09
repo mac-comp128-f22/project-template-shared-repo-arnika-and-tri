@@ -52,6 +52,10 @@ public class Grid extends GraphicsGroup {
         }
     }
 
+    /**
+     * Change the cell status after being shot by a missile. It can be a right shoot
+     *  if that shoot is on the ship, and wrong shoot if on the river
+     */
     public GraphicsGroup setCellGraphics(int row, int col, String type) {
         if (type.equals("R")) {
             cells[row][col].getGraphics().add(new RightShooted(size, size));

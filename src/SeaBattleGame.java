@@ -21,6 +21,9 @@ public class SeaBattleGame {
     private Map<Point, Boolean> shotCoordinates;
 
 
+    /***
+     * Constructs a wall of specified width/height, which represents the ship.
+     */
     public SeaBattleGame() {
         canvas = new CanvasWindow("Sea Battle", GameGUI.CANVAS_WIDTH, GameGUI.CANVAS_HEIGHT);
         canvas.setBackground(Color.GRAY);
@@ -30,6 +33,10 @@ public class SeaBattleGame {
         shipCoordinates = new HashMap<>();
     }
 
+
+    /***
+     * Computer shooting turn, which generate a random coordinates to shoot on the player board.
+     */
     private void computerTurn() {
         int compRow = (int) (Math.random() * 10);
         int compCol = (int) (Math.random() * 10);
@@ -50,6 +57,9 @@ public class SeaBattleGame {
         System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
     }
 
+    /***
+     * The player's shooting turn generates random coordinates to hit on the computer's board.
+     */
     private void playerTurn() {
         int col = Integer.parseInt(screens.coordinateField1.getText());
         int row = Integer.parseInt(screens.coordinateField2.getText());
@@ -65,6 +75,9 @@ public class SeaBattleGame {
 
     }
 
+    /***
+     * The player's shooting turn generates random coordinates to hit on the computer's board.
+     */
     public void shootMissile() {
         playerTurn();
         // need a pause
@@ -78,6 +91,9 @@ public class SeaBattleGame {
         }
     }
 
+    /***
+     * Check if the player has won by checking if all of the opponent's ships have been hit.
+     */
     public boolean youWin() {
         for (int i = 1; i < shipCoordinates.get("Opponent Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Opponent Ships").get("Ship Length:" + i)) {
@@ -91,6 +107,9 @@ public class SeaBattleGame {
         return true;
     }
 
+    /***
+     * Check if the player has lost by checking if all of their ships have been hit.
+     */
     public boolean youLose() {
         for (int i = 1; i < shipCoordinates.get("Player Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Player Ships").get("Ship Length:" + i)) {
@@ -104,6 +123,9 @@ public class SeaBattleGame {
         return true;
     }
 
+    /***
+     * Create the grid and adds it to the Canvas.
+     */
     public void generateGrid() {
         populateGrid();
         canvas.draw();
@@ -111,6 +133,9 @@ public class SeaBattleGame {
         canvas.add(grid);
     }
 
+    /***
+     * Randomly generates the location of the ships in the grid.
+     */
     private void populateGrid() {
         int size = 10;
         Random random = new Random();

@@ -4,6 +4,9 @@ import java.awt.Color;
 
 public class Ship extends GraphicsGroup {
 
+    /***
+     * Constructs a wall of specified width/height, which represents the ship.
+     */
     public Ship() {
         super();
 

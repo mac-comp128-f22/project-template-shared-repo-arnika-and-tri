@@ -10,13 +10,12 @@ public class WrongShooted extends GraphicsGroup {
     public Rectangle wall;
 
     /***
-     * Constructs a wall of specified width/height.
+     * Constructs a wall of specified width/height, which represents a wrong shoot.
      */
     public WrongShooted(double wallWidth, double wallHeight) {
         this.wall = new Rectangle(0, 0, wallWidth, wallHeight);
         this.add(wall);
         wall.setFillColor(Color.RED);
-
 
     }
 

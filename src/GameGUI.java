@@ -11,23 +11,32 @@ public class GameGUI {
     private SeaBattleGame game;
     public TextField coordinateField1;
     public TextField coordinateField2;
-    
+
     public GameGUI(CanvasWindow canvas, SeaBattleGame game) {
         this.canvas = canvas;
         this.game = game;
     }
 
+    /**
+     * Show the homescreen, which appears before starting the game.
+     */
     public void homeScreen() {
         playButton();
         quitButton();
     }
 
+    /**
+     * Setting up background for the game
+     */
     private void playingScreen() {
         game.generateGrid();
         coordinateButtons();
         coordinateLabels();
     }
 
+    /**
+     * Creates "play" button that when clicked, user can start playing.
+     */
     private void playButton() {
         CustomButton playButton = new CustomButton("START");
         playButton.setCenter(canvas.getWidth() / 2 - 100, canvas.getHeight() / 2 + 10);
@@ -56,6 +65,10 @@ public class GameGUI {
         quitButton.onClick(() -> canvas.closeWindow());
     }
 
+    /**
+     * Creates coordinateLabels which show the numbers from 0 to 9 in both row and column on computer
+     * board.
+     */
     private void coordinateLabels() {
         Image rowNums = new Image("sprite-icons/col-nums.png");
         rowNums.setCenter(CANVAS_WIDTH - 17, CANVAS_HEIGHT - 250);
@@ -68,6 +81,10 @@ public class GameGUI {
         canvas.add(columnLetter);
     }
 
+    /**
+     * Creates two text boxes to receive the row and column number after the user type in, then a shoot
+     * button to start shooting.
+     */
     private void coordinateButtons() {
         coordinateField1 = new TextField();
         coordinateField1.setCenter(5 + coordinateField1.getWidth() / 2,

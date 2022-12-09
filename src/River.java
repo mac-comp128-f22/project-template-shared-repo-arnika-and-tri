@@ -9,7 +9,7 @@ import edu.macalester.graphics.Rectangle;
 public class River extends GraphicsGroup {
     public Rectangle river;
     /***
-     * Constructs a wall of specified width/height.
+     * Constructs a wall of specified width/height, which represents the river.
      */
     public River(double riverWidth, double riverHeight) {
         river = new Rectangle(0, 0, riverWidth, riverHeight);
@@ -18,7 +18,4 @@ public class River extends GraphicsGroup {
         river.setStrokeColor(Color.BLACK);
     }
 
-    public void changeColor(){
-        river.setFillColor(Color.RED);
-    }
 }

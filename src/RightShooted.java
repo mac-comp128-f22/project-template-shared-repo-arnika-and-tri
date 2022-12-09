@@ -10,7 +10,8 @@ public class RightShooted extends GraphicsGroup {
     public Rectangle wall;
 
     /***
-     * Constructs a wall of specified width/height.
+     * Constructs a wall of specified width/height with green color, which represents a proper shoot on
+     * the ship
      */
     public RightShooted(double wallWidth, double wallHeight) {
         this.wall = new Rectangle(0, 0, wallWidth, wallHeight);
