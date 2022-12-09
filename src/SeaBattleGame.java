@@ -51,15 +51,15 @@ public class SeaBattleGame {
     }
 
     public void shootMissile() {
-        if (!youLose() && !youWin()) {
-            playerTurn();
-            computerTurn(); 
-        }
-        else if (youLose()) {
-            screens.loseMessage();
-        }
-        else if (youWin()) {
+        playerTurn();
+        // need a pause 
+        if (youWin()) {
             screens.winMessage();
+        }
+        computerTurn();
+        // need a pause
+        if (youLose()) {
+            screens.loseMessage();
         }
     }
 
@@ -67,12 +67,12 @@ public class SeaBattleGame {
         for (int i = 1; i < shipCoordinates.get("Opponent Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Opponent Ships").get("Ship Length:" + i)) {
                 if (!shotCoordinates.get(point)) {
-                    //System.out.println(point);
                     return false;
+                } else {
+                    continue;
                 }
             }
         }
-        System.out.println("------------");
         return true;
     }
 
@@ -80,12 +80,12 @@ public class SeaBattleGame {
         for (int i = 1; i < shipCoordinates.get("Player Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Player Ships").get("Ship Length:" + i)) {
                 if (!shotCoordinates.get(point)) {
-                    //System.out.println(point);
                     return false;
+                } else {
+                    continue;
                 }
             }
         }
-        System.out.println("------------");
         return true;
     }
 
