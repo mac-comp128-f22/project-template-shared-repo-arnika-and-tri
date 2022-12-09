@@ -49,15 +49,14 @@ public class SeaBattleGame {
             compCol = (int) (Math.random() * 10);
             coordinates = new Point(compCol, compRow);
         }
-        if (maze[compCol][compRow].equals("S") || maze[compCol][compRow].equals("RightShooted")) {
-            canvas.add(grid.setCellGraphics(compCol, compRow, "R"));
-            maze[compCol][compRow] = "RightShooted";
+        if (maze[compCol][compRow].equals("S") || maze[compCol][compRow].equals("C")) {
+            canvas.add(grid.setCellGraphics(compCol, compRow, "C"));
+            maze[compCol][compRow] = "C";
         } else {
             canvas.add(grid.setCellGraphics(compCol, compRow, "W"));
-            maze[compCol][compRow] = "WrongShooted";
+            maze[compCol][compRow] = "W";
         }
         shotCoordinates.put(new Point(compCol, compRow), true);
-        System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
     }
 
     /***
@@ -67,12 +66,12 @@ public class SeaBattleGame {
         int col = Integer.parseInt(screens.coordinateField1.getText());
         int row = Integer.parseInt(screens.coordinateField2.getText());
         shotCoordinates.put(new Point(col, row + 11), true);
-        if (maze[col][row].equals("S") || maze[col][row].equals("RightShooted")) {
-            canvas.add(grid.setCellGraphics(col, row + 11, "R"));
-            maze[col][row] = "RightShooted";
+        if (maze[col][row + 11].equals("S") || maze[col][row + 11].equals("C")) {
+            canvas.add(grid.setCellGraphics(col, row + 11, "C"));
+            maze[col][row + 11] = "C";
         } else {
             canvas.add(grid.setCellGraphics(col, row + 11, "W"));
-            maze[col][row] = "WrongShooted";
+            maze[col][row + 11] = "W";
         }
 
 

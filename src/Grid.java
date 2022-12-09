@@ -43,8 +43,6 @@ public class Grid extends GraphicsGroup {
                     cell.addGraphics(new Ship());
                 } else if (type.equals("R")) {
                     cell.addGraphics(new River(size, size));
-                } else if (type.equals("R")) {
-                    cell.addGraphics(new River(size, size));
                 }
                 this.add(cell.getGraphics());
                 cells[i][j] = cell;
@@ -57,7 +55,7 @@ public class Grid extends GraphicsGroup {
      *  if that shoot is on the ship, and wrong shoot if on the river
      */
     public GraphicsGroup setCellGraphics(int row, int col, String type) {
-        if (type.equals("R")) {
+        if (type.equals("C")) { // correct shooting
             cells[row][col].getGraphics().add(new RightShooted(size, size));
         } else if (type.equals("W")) {
             cells[row][col].getGraphics().add(new WrongShooted(size, size));
