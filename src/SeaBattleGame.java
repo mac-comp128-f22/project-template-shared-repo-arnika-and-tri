@@ -1,83 +1,40 @@
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
-import edu.macalester.graphics.ui.TextField;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class SeaBattleGame {
-    private static final int CANVAS_WIDTH = 396;
-    private static final int CANVAS_HEIGHT = 828;
     private static final int cellSize = 36;
     private static final int numRows = 21;
     private static final int numCols = 10;
 
     private Grid grid;
     private CanvasWindow canvas;
-    private HomeScreen screens;
+    private GameGUI screens;
 
     private String[][] maze;
     private int[][] playerBoard;
     private int[][] opponentBoard;
-
-    private TextField coordinateField1;
-    private TextField coordinateField2;
     
     
-    private Map<String,  Cell> shipCoordinates;
+    private Map<String,  Map<String, Point>> shipCoordinates;
     private Map<Point, Boolean> shotCoordinates;
 
 
     public SeaBattleGame() {
-        canvas = new CanvasWindow("Sea Battle", CANVAS_WIDTH, CANVAS_HEIGHT);
+        canvas = new CanvasWindow("Sea Battle", GameGUI.CANVAS_WIDTH, GameGUI.CANVAS_HEIGHT);
         canvas.setBackground(Color.GRAY);
-        screens = new HomeScreen(canvas, this);
+        screens = new GameGUI(canvas, this);
         screens.homeScreen();
         shotCoordinates = new HashMap<>();
         shipCoordinates = new HashMap<>();
     }
 
-    public void playingScreen() {
-        settingUpGame();
-        getCoordinates();
-        addCoordinateLabels();
-    }
-
-    private void getCoordinates() {
-        coordinateField1 = new TextField();
-        coordinateField1.setCenter(5 + coordinateField1.getWidth() / 2,
-            CANVAS_HEIGHT - coordinateField1.getHeight() / 2 - 5);
-        canvas.add(coordinateField1);
-
-        coordinateField2 = new TextField();
-        coordinateField2.setCenter(5 + coordinateField1.getWidth() + coordinateField2.getWidth() / 2,
-            CANVAS_HEIGHT - coordinateField2.getHeight() / 2 - 5);
-        canvas.add(coordinateField2);
-
-        CustomButton coordinatesButton = new CustomButton("Enter coordinate: ");
-        Point buttonPosition = new Point(
-            40 + coordinateField1.getWidth() + coordinateField2.getWidth() + coordinatesButton.getWidth() / 2,
-            CANVAS_HEIGHT - coordinatesButton.getHeight() / 2 - 5);
-        coordinatesButton.setCenter(buttonPosition);
-        canvas.add(coordinatesButton);
-
-        Image coordinateImage = new Image("sprite-icons/coordinate-button.png");
-        coordinateImage.setCenter(buttonPosition);
-        coordinateImage.setScale(0.22);
-
-        canvas.add(coordinateImage);
-
-        coordinatesButton.onClick(() -> shootMissile());
-
-    }
-
     private void computerTurn() {
-        // TODO: fix while loop and shotCoordinates functionality
         int compRow = 11 + (int) (Math.random() * 10);
         int compCol = (int) (Math.random() * 10);
         Point coordinates = new Point(compCol, compRow);
@@ -91,24 +48,18 @@ public class SeaBattleGame {
     }
 
     private void playerTurn() {
-        int row = Integer.parseInt(coordinateField1.getText());
-        int col = Integer.parseInt(coordinateField2.getText());
+        int row = Integer.parseInt(screens.coordinateField1.getText());
+        int col = Integer.parseInt(screens.coordinateField2.getText());
 
         canvas.add(grid.setCellGraphics(row, col));
         shotCoordinates.put(new Point(row, col), true);
     }
 
-    private void shootMissile() {
+    public void shootMissile() {
+        // while ships not left do this
         playerTurn();
         computerTurn();
-        // System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
-
-        // checking if shotCordinates is right.
-        // for (Map.Entry<Point, Boolean> entry : shotCoordinates.entrySet()) {
-        //     if (entry.getValue().equals(true)) {
-        //         System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-        //     }
-        // }    
+        // else end game  
         gameResult();    
     }
 
@@ -151,26 +102,16 @@ public class SeaBattleGame {
         return res;
     }
 
-    private void addCoordinateLabels() {
-        Image rowNums = new Image("sprite-icons/col-nums.png");
-        rowNums.setCenter(CANVAS_WIDTH - 17, CANVAS_HEIGHT / 2 - 230);
-        rowNums.setScale(0.4);
-        canvas.add(rowNums);
 
-        Image columnLetter = new Image("sprite-icons/row-nums.png");
-        columnLetter.setCenter(CANVAS_WIDTH / 2 - 20, CANVAS_HEIGHT - columnLetter.getHeight() / 2 - 28);
-        columnLetter.setScale(0.4);
-        canvas.add(columnLetter);
-    }
 
-    private void settingUpGame() {
-        generateGrid();
+    public void generateGrid() {
+        populateGrid();
         canvas.draw();
-        grid = new Grid(10, 21, cellSize, maze, this);
+        grid = new Grid(numCols, numRows, cellSize, maze, this);
         canvas.add(grid);
     }
 
-    private void generateGrid() {
+    private void populateGrid() {
         int size = 10;
         Random random = new Random();
         playerBoard = new int[size][size];
@@ -241,9 +182,9 @@ public class SeaBattleGame {
                 }
             }
         }
-        maze = new String[10][21];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 21; j++) {
+        maze = new String[numCols][numRows];
+        for (int i = 0; i < numCols; i++) {
+            for (int j = 0; j < numRows; j++) {
                 if (j < 10) {
                     if (playerBoard[i][j] == 0 || playerBoard[i][j] == 9) {
                         maze[i][j] = "R";
