@@ -77,14 +77,17 @@ public class SeaBattleGame {
     }
 
     private void computerTurn() {
+        // TODO: fix while loop and shotCoordinates functionality
         int compRow = 11 + (int) (Math.random() * 10);
         int compCol = (int) (Math.random() * 10);
-        while (maze[compCol][compRow] == "Shooted") {
+        Point coordinates = new Point(compCol, compRow);
+        while (shotCoordinates.get(coordinates)) {
             compRow = 11 + (int) (Math.random() * 10);
             compCol = (int) (Math.random() * 10);
+            coordinates = new Point(compCol, compRow);
         }
         canvas.add(grid.setCellGraphics(compCol, compRow));
-        shotCoordinates.put(new Point(compRow, compCol), true);
+        shotCoordinates.put(new Point(compCol, compRow), true);
     }
 
     private void playerTurn() {
@@ -98,14 +101,14 @@ public class SeaBattleGame {
     private void shootMissile() {
         playerTurn();
         computerTurn();
-        System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+        // System.out.println(Arrays.deepToString(maze).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
 
         // checking if shotCordinates is right.
-        for (Map.Entry<Point, Boolean> entry : shotCoordinates.entrySet()) {
-            if (entry.getValue().equals(true)) {
-                System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-            }
-        }    
+        // for (Map.Entry<Point, Boolean> entry : shotCoordinates.entrySet()) {
+        //     if (entry.getValue().equals(true)) {
+        //         System.out.println(entry.getKey() + ":" + entry.getValue().toString());
+        //     }
+        // }    
         gameResult();    
     }
 
@@ -117,11 +120,11 @@ public class SeaBattleGame {
                 System.out.println("Computer Win!");
             }
             canvas.closeWindow();
-            ;
         }
     }
 
     private int checkWin() {
+        // TODO: update this method to use shotCoordinates
         boolean playerHasShip = false;
         boolean compHasShip = false;
         for (int i = 0; i < numCols; i++) {
