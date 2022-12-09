@@ -58,7 +58,7 @@ public class GameGUI {
 
     private void coordinateLabels() {
         Image rowNums = new Image("sprite-icons/col-nums.png");
-        rowNums.setCenter(CANVAS_WIDTH - 17, CANVAS_HEIGHT / 2 - 230);
+        rowNums.setCenter(CANVAS_WIDTH - 17, CANVAS_HEIGHT - 250);
         rowNums.setScale(0.4);
         canvas.add(rowNums);
 

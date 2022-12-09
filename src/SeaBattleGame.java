@@ -30,11 +30,11 @@ public class SeaBattleGame {
     }
 
     private void computerTurn() {
-        int compRow = 11 + (int) (Math.random() * 10);
+        int compRow = (int) (Math.random() * 10);
         int compCol = (int) (Math.random() * 10);
         Point coordinates = new Point(compCol, compRow);
         while (shotCoordinates.get(coordinates)) {
-            compRow = 11 + (int) (Math.random() * 10);
+            compRow = (int) (Math.random() * 10);
             compCol = (int) (Math.random() * 10);
             coordinates = new Point(compCol, compRow);
         }
@@ -43,11 +43,11 @@ public class SeaBattleGame {
     }
 
     private void playerTurn() {
-        int row = Integer.parseInt(screens.coordinateField1.getText());
-        int col = Integer.parseInt(screens.coordinateField2.getText());
+        int col = Integer.parseInt(screens.coordinateField1.getText());
+        int row = Integer.parseInt(screens.coordinateField2.getText());
 
-        canvas.add(grid.setCellGraphics(row, col));
-        shotCoordinates.put(new Point(row, col), true);
+        canvas.add(grid.setCellGraphics(col, row + 11));
+        shotCoordinates.put(new Point(col, row + 11), true);
     }
 
     public void shootMissile() {
@@ -56,21 +56,37 @@ public class SeaBattleGame {
             computerTurn();
         }
         else if (youLose()) {
+            System.out.println("You Lose");
+            canvas.closeWindow();
             // display message, end game
         }
         else if (youWin()) {
+            System.out.println("You Win");
+            canvas.closeWindow();
             // display message, end game
         }
     }
 
     public boolean youWin() {
-        // if all their ships are hit, return true
-        return false;
+        for (int i = 1; i < shipCoordinates.get("Opponent Ships").size() + 1; i++) {
+            for (Point point : shipCoordinates.get("Opponent Ships").get("Ship Length:" + i)) {
+                if (!shotCoordinates.get(point)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean youLose() {
-        // if all your ships are hit, return true 
-        return false;
+        for (int i = 1; i < shipCoordinates.get("Player Ships").size() + 1; i++) {
+            for (Point point : shipCoordinates.get("Player Ships").get("Ship Length:" + i)) {
+                if (!shotCoordinates.get(point)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private int checkWin() {
@@ -187,16 +203,20 @@ public class SeaBattleGame {
                         x++;
                     }
                 }
-                boardShips.put("Ship Lenght:" + i, singleShipCoordinates);
+                boardShips.put("Ship Length:" + i, singleShipCoordinates);
             }
-            shipCoordinates.put("board", boardShips);
+            if (board == playerBoard) {
+                shipCoordinates.put("Player Ships", boardShips);
+            } else {
+                shipCoordinates.put("Opponent Ships", boardShips);
+            }
         }
-
+        
         maze = new String[numCols][numRows];
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
                 if (j < 10) {
-                    if (playerBoard[i][j] == 0 || playerBoard[i][j] == 9) {
+                    if (opponentBoard[i][j] == 0 || opponentBoard[i][j] == 9) {
                         maze[i][j] = "R";
                     } else {
                         maze[i][j] = "S";
@@ -204,7 +224,7 @@ public class SeaBattleGame {
                 } else if (j == 10) {
                     maze[i][j] = "W";
                 } else {
-                    if (opponentBoard[i][j - 11] == 0 || opponentBoard[i][j - 11] == 9) {
+                    if (playerBoard[i][j - 11] == 0 || playerBoard[i][j - 11] == 9) {
                         maze[i][j] = "R";
                     } else {
                         maze[i][j] = "S";
