@@ -18,6 +18,10 @@ To run and play the game:
 
 To play the game, run the code and click the play button. Enter the coordinates of the square you want to check for a ship in the textfields at the bottom of the screen (entering the x/column value in the first textfield, and the y/row value in the second). The square you have chosen to "bomb" will turn green if you have correctly found a ship, and red if you haven't and have instead hit the river. Use this color system to check how many ships you have found. There are five ships in total (for each player) of lengths 5, 4, 3, 2, and 1, respectively. Continue entering coordinates until one of the player have found all of their opponent's ships. 
 
+## Disclaimer
+
+If images are not showing up, or you see a red X bounded be a box on the screen, that may mean that you need to download the images to your laptop and then reload the game, to be able to view the images. If needed, the images can be found and downloaded from [this drive](https://drive.google.com/drive/folders/1xXfyN0QN7NGnEiZ5fl7XgGy-2yQac1Iv).
+
 ## How To Test
 
 To test the program, you could try the followings:
