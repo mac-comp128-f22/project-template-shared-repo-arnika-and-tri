@@ -92,7 +92,7 @@ public class SeaBattleGame {
     /***
      * Checks if the player has won by checking if all of the opponent's ships have been hit.
      */
-    public boolean youWin() {
+    private boolean youWin() {
         for (int i = 1; i < shipCoordinates.get("Opponent Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Opponent Ships").get("Ship Length:" + i)) {
                 if (!shotCoordinates.get(point)) {
@@ -108,7 +108,7 @@ public class SeaBattleGame {
     /***
      * Checks if the player has lost by checking if all of their ships have been hit.
      */
-    public boolean youLose() {
+    private boolean youLose() {
         for (int i = 1; i < shipCoordinates.get("Player Ships").size() + 1; i++) {
             for (Point point : shipCoordinates.get("Player Ships").get("Ship Length:" + i)) {
                 if (!shotCoordinates.get(point)) {
